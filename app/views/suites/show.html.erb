@@ -3,8 +3,8 @@
 <%= render @suite %>
 
 <div>
-  <%= link_to "Edit this suite", edit_suite_path(@suite) %> |
-  <%= link_to "Back to suites", suites_path %>
+  <%= link_to "Edit this suite", edit_project_suite_path(@project, @suite) %> |
+  <%= link_to "Back to suites", project_suites_path %>
 
-  <%= button_to "Destroy this suite", @suite, method: :delete %>
+  <%#= button_to "Destroy this suite", @suite, method: :delete %>
 </div>

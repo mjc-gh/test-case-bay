@@ -8,7 +8,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   test 'get index' do
     sign_in users(:achilla_marsh)
 
-    get projects_url
+    get projects_path
 
     assert_response :success
   end
@@ -16,7 +16,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   test 'get new' do
     sign_in users(:achilla_marsh)
 
-    get new_project_url
+    get new_project_path
 
     assert_response :success
   end
@@ -25,10 +25,10 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:achilla_marsh)
 
     assert_difference 'Project.count' do
-      post projects_url, params: { project: { description: @project.description, title: @project.title } }
+      post projects_path, params: { project: { description: @project.description, title: @project.title } }
     end
 
-    assert_redirected_to project_url(proj = Project.last)
+    assert_redirected_to project_path(proj = Project.last)
 
     assert_includes users(:achilla_marsh).projects, proj
   end
@@ -36,7 +36,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   test 'get show' do
     sign_in users(:achilla_marsh)
 
-    get project_url(@project)
+    get project_path(@project)
 
     assert_response :success
   end
@@ -44,7 +44,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   test 'get show unauth user' do
     sign_in users(:bodo_bolger)
 
-    get project_url(@project)
+    get project_path(@project)
 
     assert_response :not_found
   end
@@ -52,7 +52,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   test 'get edit' do
     sign_in users(:achilla_marsh)
 
-    get edit_project_url(@project)
+    get edit_project_path(@project)
 
     assert_response :success
   end
@@ -60,19 +60,19 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   test 'patch update' do
     sign_in users(:achilla_marsh)
 
-    patch project_url(@project), params: {
+    patch project_path(@project), params: {
       project: { description: @project.description, title: @project.title } }
 
-    assert_redirected_to project_url(@project)
+    assert_redirected_to project_path(@project)
   end
 
   test 'delete destroy' do
     sign_in users(:achilla_marsh)
 
     assert_difference 'Project.count', -1 do
-      delete project_url(@project)
+      delete project_path(@project)
     end
 
-    assert_redirected_to projects_url
+    assert_redirected_to projects_path
   end
 end

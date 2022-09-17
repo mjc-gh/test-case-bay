@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def not_found
     render :not_found, status: :not_found
   end
+
+  def set_project
+    @project = current_user.projects.find(params[:project_id])
+  end
 end

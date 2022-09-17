@@ -10,7 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_17_004540) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_17_021723) do
+  create_table "cases", force: :cascade do |t|
+    t.integer "suite_id", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.text "acceptance_criteria", null: false
+    t.integer "steps_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["suite_id"], name: "index_cases_on_suite_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.integer "steps_count", default: 0
+    t.integer "suites_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "steps", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.text "acceptance_criteria", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_steps_on_project_id"
+  end
+
+  create_table "suites", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.integer "cases_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_suites_on_project_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -23,4 +65,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_17_004540) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "cases", "suites"
+  add_foreign_key "projects", "users"
+  add_foreign_key "steps", "projects"
+  add_foreign_key "suites", "projects"
 end

@@ -2,47 +2,28 @@ require "test_helper"
 
 class StepsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @step = steps(:one)
+    @project = projects(:achillas_app_qa)
+    @step = steps(:achillas_app_qa_click_sign_up_step)
   end
 
-  test "should get index" do
-    get steps_url
-    assert_response :success
-  end
+  test "create step" do
+    sign_in users(:achilla_marsh)
 
-  test "should get new" do
-    get new_step_url
-    assert_response :success
-  end
-
-  test "should create step" do
     assert_difference("Step.count") do
-      post steps_url, params: { step: { acceptance_criteria: @step.acceptance_criteria, details: @step.details, title: @step.title } }
+      post project_steps_path(@project), params: {
+        step: { acceptance_criteria: @step.acceptance_criteria, description: @step.description, title: @step.title } }
     end
 
-    assert_redirected_to step_url(Step.last)
+    assert_redirected_to project_url(@project)
   end
 
-  test "should show step" do
-    get step_url(@step)
-    assert_response :success
-  end
+  test "destroy step" do
+    sign_in users(:achilla_marsh)
 
-  test "should get edit" do
-    get edit_step_url(@step)
-    assert_response :success
-  end
-
-  test "should update step" do
-    patch step_url(@step), params: { step: { acceptance_criteria: @step.acceptance_criteria, details: @step.details, title: @step.title } }
-    assert_redirected_to step_url(@step)
-  end
-
-  test "should destroy step" do
-    assert_difference("Step.count", -1) do
-      delete step_url(@step)
+    assert_difference '@project.steps.count', -1 do
+      delete project_step_path(@project, @step)
     end
 
-    assert_redirected_to steps_url
+    assert_redirected_to project_url(@project)
   end
 end

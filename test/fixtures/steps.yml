@@ -1,11 +1,16 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+achillas_app_qa_click_sign_up_step:
+  project: achillas_app_qa
+  title: Click the "Sign Up" button on the landing page
+  acceptance_criteria: Visitor is taken to the sign up
 
-one:
-  title: MyString
-  details: MyText
-  acceptance_criteria: MyText
+achillas_app_qa_submit_sign_up_step:
+  project: achillas_app_qa
+  title: Complete the sign up form using a new email address
+  acceptance_criteria: Taken to the first step of onboarding
 
-two:
-  title: MyString
-  details: MyText
-  acceptance_criteria: MyText
+achillas_app_qa_onboarding_step_1:
+  project: achillas_app_qa
+  title: Upload an avatar
+  acceptance_criteria: |
+    You are taken to step 2 of onboarding
+    The avatar image is successfully uploaded and visible

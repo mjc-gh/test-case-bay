@@ -1,11 +1,11 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+achillas_app_qa_onboarding_new:
+  suite: achillas_app_qa_onboarding
+  title: New Customers
+  acceptance_criteria: |
+    New customer record is created and onboarding steps are all completed
 
-one:
-  title: MyString
-  details: MyText
-  acceptance_criteria: MyText
-
-two:
-  title: MyString
-  details: MyText
-  acceptance_criteria: MyText
+achillas_app_qa_onboarding_returning:
+  suite: achillas_app_qa_onboarding
+  title: Returning Customers
+  acceptance_criteria: |
+    Returning customer can resume onboarding

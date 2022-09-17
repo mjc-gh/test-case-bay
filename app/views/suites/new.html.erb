@@ -1,9 +1,9 @@
 <h1>New suite</h1>
 
-<%= render "form", suite: @suite %>
+<%= render "form", project: @project, suite: @suite %>
 
 <br>
 
 <div>
-  <%= link_to "Back to suites", suites_path %>
+  <%= link_to "Back to suites", project_suites_path(@project) %>
 </div>

@@ -6,6 +6,7 @@ class CreateProjects < ActiveRecord::Migration[7.0]
       t.string     :title, null: false
       t.text       :description
 
+      t.integer    :steps_count, default: 0
       t.integer    :suites_count, default: 0
 
       t.timestamps

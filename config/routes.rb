@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :steps
   root 'contents#root'
 
   devise_for :users
@@ -7,7 +6,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :steps, only: %i[create destroy]
 
-    resources :suites do
+    resources :suites, except: %i[index] do
       resources :cases, except: %i[index]
     end
   end

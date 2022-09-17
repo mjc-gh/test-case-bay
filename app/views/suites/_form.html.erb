@@ -1,4 +1,4 @@
-<%= form_with(model: suite) do |form| %>
+<%= form_with(model: suite, url: [project, suite]) do |form| %>
   <% if suite.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(suite.errors.count, "error") %> prohibited this suite from being saved:</h2>

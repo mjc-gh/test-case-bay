@@ -1,9 +1,9 @@
 <h1>New case</h1>
 
-<%= render "form", case: @case %>
+<%= render "form", project: @project, suite: @suite, test_case: @case %>
 
 <br>
 
 <div>
-  <%= link_to "Back to cases", cases_path %>
+  <%= link_to "Back to suite", [@project, @suite, @case] %>
 </div>

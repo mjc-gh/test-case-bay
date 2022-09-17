@@ -1,48 +1,63 @@
-require "test_helper"
+require 'test_helper'
 
 class CasesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @case = cases(:one)
+    @project = projects(:achillas_app_qa)
+    @suite = suites(:achillas_app_qa_onboarding)
+    @case = cases(:achillas_app_qa_onboarding_new)
   end
 
-  test "should get index" do
-    get cases_url
+  test 'get new' do
+    sign_in users(:achilla_marsh)
+
+    get new_project_suite_case_path(@project, @suite)
+
     assert_response :success
   end
 
-  test "should get new" do
-    get new_case_url
-    assert_response :success
-  end
+  test 'post create' do
+    sign_in users(:achilla_marsh)
 
-  test "should create case" do
-    assert_difference("Case.count") do
-      post cases_url, params: { case: { acceptance_criteria: @case.acceptance_criteria, details: @case.details, title: @case.title } }
+    assert_difference('Case.count') do
+      post project_suite_cases_path(@project, @suite), params: {
+        case: { acceptance_criteria: @case.acceptance_criteria, description: @case.description, title: @case.title } }
     end
 
-    assert_redirected_to case_url(Case.last)
+    assert_redirected_to project_suite_case_path(@project, @suite, @suite.cases.last)
   end
 
-  test "should show case" do
-    get case_url(@case)
+  test 'get show' do
+    sign_in users(:achilla_marsh)
+
+    get project_suite_case_path(@project, @suite, @case)
+
     assert_response :success
   end
 
-  test "should get edit" do
-    get edit_case_url(@case)
+  test 'get edit' do
+    sign_in users(:achilla_marsh)
+
+    get edit_project_suite_case_path(@project, @suite, @case)
+
     assert_response :success
   end
 
-  test "should update case" do
-    patch case_url(@case), params: { case: { acceptance_criteria: @case.acceptance_criteria, details: @case.details, title: @case.title } }
-    assert_redirected_to case_url(@case)
+  test 'patch update case' do
+    sign_in users(:achilla_marsh)
+
+    patch project_suite_case_path(@project, @suite, @case), params: {
+      case: { acceptance_criteria: @case.acceptance_criteria, description: @case.description, title: @case.title } }
+
+    assert_redirected_to project_suite_case_path(@project, @suite, @case)
   end
 
-  test "should destroy case" do
-    assert_difference("Case.count", -1) do
-      delete case_url(@case)
+  test 'destroy case' do
+    sign_in users(:achilla_marsh)
+
+    assert_difference('Case.count', -1) do
+      delete project_suite_case_path(@project, @suite, @case)
     end
 
-    assert_redirected_to cases_url
+    assert_redirected_to project_suite_url(@project, @suite)
   end
 end

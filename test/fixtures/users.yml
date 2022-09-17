@@ -1,3 +1,5 @@
+# Name generator: https://www.fantasynamegenerators.com/lotr-hobbit-names.php
+
 achilla_marsh:
   email: achilla.marsh@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'Password123') %>

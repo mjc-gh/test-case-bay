@@ -1,10 +1,10 @@
 <h1>Editing case</h1>
 
-<%= render "form", case: @case %>
+<%= render "form", project: @project, suite: @suite, test_case: @case %>
 
 <br>
 
 <div>
-  <%= link_to "Show this case", @case %> |
-  <%= link_to "Back to cases", cases_path %>
+  <%= link_to "Show this case", [@project, @suite, @case] %> |
+  <%= link_to "Back to suite", [@project, @suite] %>
 </div>
