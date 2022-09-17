@@ -1,0 +1,15 @@
+<%= form_with model: step, url: case_steps_path(test_case), id: dom_id(test_case, :builder_form) do |form| -%>
+  <%= form.text_field :title -%>
+  <%= form.text_area :acceptance_criteria, placeholder: 'Provide acceptance criteria for this step' -%>
+  <%= form.text_area :description, placeholder: 'Optional description for more explanation' -%>
+
+  <div class="flex justify-between">
+    <%= render ButtonComponent.new(type: 'submit').with_content 'Create Step' -%>
+
+    <%= link_to builder_case_steps_path(test_case) do -%>
+      <%= render ButtonComponent.new(color: :warning).with_content 'Cancel' -%>
+    <% end -%>
+  </div>
+
+  <%= model_errors step -%>
+<% end -%>

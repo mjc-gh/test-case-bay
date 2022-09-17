@@ -1,0 +1,15 @@
+<input type="text"
+       autocomplete="off"
+       name="text"
+       placeholder="Search or create steps..."
+       data-case-step-builder-target="search"
+       data-action="case-step-builder#update"
+       class="pr-24" />
+
+<%= form_with model: Step.new, url: add_new_case_steps_path(test_case) do |form| -%>
+  <%= form.hidden_field :title, data: { case_step_builder_target: 'newTitle' } -%>
+
+  <div class="absolute right-1 top-1/2 transform -translate-y-1/2 opacity-0 transition-opacity" data-case-step-builder-target="newButton">
+    <%= render ButtonComponent.new(type: 'submit', size: :xsmall).with_content 'New Step' -%>
+  </div>
+<% end -%>

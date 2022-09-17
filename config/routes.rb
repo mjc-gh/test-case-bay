@@ -14,6 +14,13 @@ Rails.application.routes.draw do
   end
 
   resources :cases, only: [] do
-    resources :steps, only: %i[index create edit update], controller: 'case_steps'
+    resources :steps, only: %i[index create destroy], controller: 'case_steps' do
+      collection do
+        get 'builder', as: :builder
+
+        # Two-step form
+        post 'add_new' => :add_new, as: :add_new
+      end
+    end
   end
 end

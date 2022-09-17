@@ -1,13 +1,27 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
+  static targets = [
+    'search', 'newButton', 'newTitle'
+  ];
+
+  get searchValue() {
+    return this.searchTarget.value;
+  }
+
   connect() {
     console.log(this);
   }
 
-  update(ev) {
-    const { target: { value } } = ev;
+  update() {
+    const value = this.searchValue;
 
-    console.log(this, value);
+    this.newTitleTarget.value = value;
+
+    if (value.length > 0) {
+      this.newButtonTarget.classList.remove('opacity-0');
+    } else {
+      this.newButtonTarget.classList.add('opacity-0');
+    }
   }
 }

@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(@case, :builder_form) do -%>
+  <%= render 'step_form', step: @step, test_case: @case -%>
+<% end -%>

@@ -4,6 +4,8 @@ class ButtonComponent < ViewComponent::Base
   HTML_COLOR_CLASSES = {
     primary: 'border-transparent bg-teal-600 text-white hover:bg-teal-700 focus:ring-teal-500',
     danger: 'border-transparent bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
+
+    warning: 'border-red-400 text-red-400 hover:text-red-600 hover:border-red-600',
     clear: 'border-teal-400 text-teal-500 hover:text-teal-600 hover:border-teal-600',
   }
 

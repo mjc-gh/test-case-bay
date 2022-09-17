@@ -19,5 +19,7 @@
     <% end -%>
   <% end -%>
 
-  <%= render 'builder', project: @project, suite: @suite, test_case: @case, ordered_steps: @ordered_steps -%>
+  <div class="pb-24">
+    <%= render 'builder', project: @project, suite: @suite, test_case: @case, ordered_steps: @ordered_steps -%>
+  </div>
 <% end -%>
