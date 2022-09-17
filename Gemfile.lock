@@ -151,6 +151,7 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
+    pg (1.4.3)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -249,6 +250,7 @@ DEPENDENCIES
   guard
   guard-minitest
   inline_svg (~> 1.7)!
+  pg
   pry
   puma (~> 5.0)
   rails (~> 7.0.4)
