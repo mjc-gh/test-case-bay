@@ -8,6 +8,8 @@ class CasesController < ApplicationController
   respond_to :html
 
   def show
+    @ordered_steps = @case.steps.order(row_order: :asc).load
+
     respond_with @case
   end
 

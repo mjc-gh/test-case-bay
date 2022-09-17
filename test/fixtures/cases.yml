@@ -1,6 +1,7 @@
 achillas_app_qa_onboarding_new:
   suite: achillas_app_qa_onboarding
   title: New Customers
+  steps_count: 3
   acceptance_criteria: |
     New customer record is created and onboarding steps are all completed
 

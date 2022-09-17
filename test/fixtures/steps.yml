@@ -8,7 +8,7 @@ achillas_app_qa_submit_sign_up_step:
   title: Complete the sign up form using a new email address
   acceptance_criteria: Taken to the first step of onboarding
 
-achillas_app_qa_onboarding_step_1:
+achillas_app_qa_onboarding_avatar:
   project: achillas_app_qa
   title: Upload an avatar
   acceptance_criteria: |

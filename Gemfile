@@ -6,6 +6,7 @@ ruby '3.1.2'
 gem 'devise'
 gem 'inline_svg', '~> 1.7', github: 'mjc-gh/inline_svg'
 gem 'rails', '~> 7.0.4'
+gem 'ranked-model', '~> 0.4'
 gem 'responders'
 gem 'shakapacker', '~> 6.5'
 gem 'sprockets-rails'
@@ -33,4 +34,8 @@ group :development do
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem 'rack-mini-profiler'
+end
+
+group :development, :test do
+  gem 'pry'
 end

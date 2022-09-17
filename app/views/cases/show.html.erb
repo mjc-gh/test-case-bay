@@ -1,8 +1,23 @@
-<%= render @case, test_case: @case %>
+<%= render PageComponent.new do |c| -%>
+  <% c.header { @case.title } -%>
 
-<div>
-  <%= link_to "Edit this case", edit_project_suite_case_path(@case) %> |
-  <%= link_to "Back to suite", project_suite_path(@project, @suite) %>
+  <% c.action do -%>
+    <%= link_to project_suite_path(@project, @suite) do %>
+      <%= render ButtonComponent.new(color: :clear).with_content 'Back' -%>
+    <% end -%>
+  <% end -%>
 
-  <%#= button_to "Destroy this case", @case, method: :delete %>
-</div>
+  <% c.action do -%>
+    <%= link_to edit_project_suite_case_path(@project, @suite, @case) do %>
+      <%= render ButtonComponent.new.with_content 'Edit' -%>
+    <% end -%>
+  <% end -%>
+
+  <% c.action do -%>
+    <%= form_with model: @case, url: [@project, @suite, @case], method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: 'inline' do -%>
+      <%= render ButtonComponent.new(type: 'submit', color: :danger).with_content 'Delete' -%>
+    <% end -%>
+  <% end -%>
+
+  <%= render 'builder', project: @project, suite: @suite, test_case: @case, ordered_steps: @ordered_steps -%>
+<% end -%>

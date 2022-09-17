@@ -1,0 +1,14 @@
+app_qa_onboarding_new_step_1:
+  case: achillas_app_qa_onboarding_new
+  step: achillas_app_qa_click_sign_up_step
+  row_order: 1
+
+app_qa_onboarding_new_step_2:
+  case: achillas_app_qa_onboarding_new
+  step: achillas_app_qa_submit_sign_up_step
+  row_order: 2
+
+app_qa_onboarding_new_step_3:
+  case: achillas_app_qa_onboarding_new
+  step: achillas_app_qa_onboarding_avatar
+  row_order: 3

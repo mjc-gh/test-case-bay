@@ -1,0 +1,38 @@
+<div class="space-y-12">
+  <div class="space-y-6">
+    <h2 class="text-xl">Case Details</h2>
+    <dl class="sm:divide-y sm:divide-gray-200 max-w-screen-sm">
+      <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+        <dt class="text-sm font-medium text-gray-300">Description</dt>
+        <dd class="mt-1 text-sm text-white sm:col-span-2 sm:mt-0"><%= test_case.description || tag.span(class: 'text-rose-200') { 'None Provided' } -%></dd>
+      </div>
+      <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+        <dt class="text-sm font-medium text-gray-300">Acceptance Criteria</dt>
+        <dd class="mt-1 text-sm text-white sm:col-span-2 sm:mt-0"><%= test_case.acceptance_criteria -%></dd>
+      </div>
+    </div>
+  </div>
+
+  <div class="space-y-6">
+    <h2 class="text-xl">Steps</h2>
+    <div class="pl-4">
+      <ol id="<%= dom_id test_case, :steps -%>" class="list-outside list-decimal space-y-3 max-w-screen-md">
+        <% ordered_steps.each do |step| -%>
+          <%= turbo_frame_tag dom_id(step, dom_id(test_case)) do -%>
+            <%= render OrderedStepComponent.new(step: step, test_case: test_case) do |c| -%>
+              <% c.edit_action do -%>
+                <%= link_to edit_case_step_path(test_case, step), class: 'text-red-100 hover:text-red-600' do -%>
+                  <%= inline_svg_tag 'icons/hero/trash.svg', class: 'h-5 w-5' -%>
+                  <span class="sr-only">Delete</span>
+                <% end -%>
+              <% end -%>
+            <% end -%>
+          <% end -%>
+        <% end -%>
+        <li>
+          <%= render 'case_step_form', **local_assigns -%>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<%= turbo_frame_tag dom_id(@step, dom_id(@case)) do -%>
+  <%= form_with url: case_steps_path(test_case) do |form| -%>
+    <%= form.text_field :title, placeholder: 'Search existing steps...', class: 'min-w-full' -%>
+  <% end -%>
+<% end -%>

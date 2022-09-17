@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_17_021723) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_17_142431) do
+  create_table "case_steps", force: :cascade do |t|
+    t.integer "case_id", null: false
+    t.integer "step_id", null: false
+    t.integer "row_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["case_id"], name: "index_case_steps_on_case_id"
+    t.index ["step_id"], name: "index_case_steps_on_step_id"
+  end
+
   create_table "cases", force: :cascade do |t|
     t.integer "suite_id", null: false
     t.string "title", null: false
@@ -65,6 +75,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_17_021723) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "case_steps", "cases"
+  add_foreign_key "case_steps", "steps"
   add_foreign_key "cases", "suites"
   add_foreign_key "projects", "users"
   add_foreign_key "steps", "projects"

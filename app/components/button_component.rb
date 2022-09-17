@@ -2,9 +2,9 @@
 
 class ButtonComponent < ViewComponent::Base
   HTML_COLOR_CLASSES = {
-    primary: 'bg-teal-600 text-white hover:bg-teal-700 focus:ring-teal-500',
-    danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
-    clear: 'bg-transparent border-teal-500 text-teal-500 hover:text-teal-700 hover:border-teal-700',
+    primary: 'border-transparent bg-teal-600 text-white hover:bg-teal-700 focus:ring-teal-500',
+    danger: 'border-transparent bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
+    clear: 'border-teal-400 text-teal-500 hover:text-teal-600 hover:border-teal-600',
   }
 
   HTML_SIZE_CLASSES = {
@@ -19,7 +19,7 @@ class ButtonComponent < ViewComponent::Base
     @type = type
     @kwargs = kwargs
 
-    @html_class = 'inline-flex items-center rounded border border-transparent shadow-sm font-medium '\
+    @html_class = 'inline-flex items-center rounded border shadow-sm font-medium '\
       'focus:outline-none focus:ring-2 focus:ring-offset-2 '\
       "#{HTML_COLOR_CLASSES[color]} #{HTML_SIZE_CLASSES[size]}"
   end
