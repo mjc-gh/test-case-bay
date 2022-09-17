@@ -1,0 +1,17 @@
+<nav class="border-b-2 border-teal-900 py-4 mb-4">
+  <div class="max-w-screen-xl px-2 flex justify-between">
+    <h1 class="text-4xl text-center">Test Case Bay</h1>
+
+    <% if user_signed_in? -%>
+      <ul class="flex gap-10 justify-center items-center pt-2">
+        <li><%= link_to 'Account', '#', class: 'text-teal-400 text-lg hover:underline' -%></li>
+        <li><%= link_to 'Projects', '#', class: 'text-teal-400 text-lg hover:underline' -%></li>
+      </ul>
+
+    <% else -%>
+      <%= link_to new_user_registration_path do -%>
+        Sign Up
+      <% end -%>
+    <% end -%>
+  </div>
+</nav>

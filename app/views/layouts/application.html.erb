@@ -10,7 +10,9 @@
     <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
   </head>
 
-  <body class="h-full min-h-full">
+  <body class="h-full min-h-full bg-zinc-800 text-white">
+    <%= render 'shared/nav' -%>
+
     <%= yield %>
   </body>
 </html>

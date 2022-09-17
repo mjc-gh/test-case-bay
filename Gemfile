@@ -3,11 +3,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
+gem 'devise'
 gem 'rails', '~> 7.0.4'
+gem 'shakapacker', '~> 6.5'
 gem 'sprockets-rails'
 gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 5.0'
-gem 'shakapacker', '~> 6.5'
+gem 'view_component'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem 'turbo-rails'
