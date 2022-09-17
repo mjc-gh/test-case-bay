@@ -7,9 +7,7 @@ Rails.application.routes.draw do
     resources :steps, only: %i[create destroy]
 
     resources :suites, except: %i[index] do
-      resources :cases, except: %i[index] do
-        resources :steps, only: %i[index create], controller: 'case_steps'
-      end
+      resources :cases, except: %i[index]
     end
   end
 
@@ -20,6 +18,10 @@ Rails.application.routes.draw do
 
         # Two-step form
         post 'add_new' => :add_new, as: :add_new
+      end
+
+      member do
+        patch :reorder
       end
     end
   end

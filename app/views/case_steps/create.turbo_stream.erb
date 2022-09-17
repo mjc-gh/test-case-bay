@@ -1,5 +1,5 @@
 <%= turbo_stream.before dom_id(@case, :last_li) do -%>
-  <%= render 'case_steps/builder_item', test_case: @case, step: @step -%>
+  <%= render 'case_steps/builder_item', test_case: @case, step: @step, position: :last -%>
 <% end -%>
 
 <%= turbo_stream.update dom_id(@case, :builder) do -%>

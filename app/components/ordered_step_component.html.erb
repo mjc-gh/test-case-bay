@@ -3,7 +3,11 @@
     <div class="flex justify-between">
       <h5 class="text-xl"><%= @step.title -%></h5>
 
-      <%= edit_action -%>
+      <div class="flex items-center gap-2">
+        <% edit_actions.each do |edit_action| -%>
+          <%= edit_action -%>
+        <% end -%>
+      </div>
     </div>
 
     <p class="text-base text-gray-400"><%= @step.acceptance_criteria -%></p>

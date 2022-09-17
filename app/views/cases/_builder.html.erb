@@ -17,8 +17,9 @@
     <h2 class="text-xl">Steps</h2>
     <div class="pl-4">
       <ol id="<%= dom_id test_case, :steps -%>" class="list-outside list-decimal space-y-3 max-w-screen-md">
-        <% ordered_steps.each do |step| -%>
-          <%= render 'case_steps/builder_item', test_case: test_case, step: step -%>
+        <% ordered_steps.each.with_index do |step, index| -%>
+          <%= render 'case_steps/builder_item', test_case: test_case, step: step,
+            position: (index.zero? ? :first : index == ordered_steps.size - 1 ? :last : :middle) -%>
         <% end -%>
 
         <li class="pl-2" id="<%= dom_id test_case, :last_li -%>">

@@ -1,5 +1,29 @@
 <%= turbo_frame_tag dom_id(step, dom_id(test_case)), class: 'block' do -%>
   <%= render OrderedStepComponent.new(step: step, test_case: test_case) do |c| -%>
+    <% unless position == :first -%>
+      <% c.edit_action do -%>
+        <%= form_with url: reorder_case_step_path(test_case, step), method: :patch, class: 'text-teal-100 hover:text-teal-600' do |form| -%>
+          <%= form.hidden_field :direction, value: 'up' -%>
+          <button type="submit">
+            <%= inline_svg_tag 'icons/hero/chevron_up.svg', class: 'h-5 w-5' -%>
+            <span class="sr-only">Move up</span>
+          </button>
+        <% end -%>
+      <% end -%>
+    <% end -%>
+
+    <% unless position == :last -%>
+      <% c.edit_action do -%>
+        <%= form_with url: reorder_case_step_path(test_case, step), method: :patch, class: 'text-teal-100 hover:text-teal-600' do |form| -%>
+          <%= form.hidden_field :direction, value: 'down' -%>
+          <button type="submit">
+            <%= inline_svg_tag 'icons/hero/chevron_down.svg', class: 'h-5 w-5' -%>
+            <span class="sr-only">Move down</span>
+          </button>
+        <% end -%>
+      <% end -%>
+    <% end -%>
+
     <% c.edit_action do -%>
       <%= form_with url: case_step_path(test_case, step), method: :delete, class: 'text-red-100 hover:text-red-600', data: { turbo_confirm: 'Are you sure?' } do -%>
         <button type="submit">
