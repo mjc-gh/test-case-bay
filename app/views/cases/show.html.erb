@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @case %>
+
+<div>
+  <%= link_to "Edit this case", edit_case_path(@case) %> |
+  <%= link_to "Back to cases", cases_path %>
+
+  <%= button_to "Destroy this case", @case, method: :delete %>
+</div>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Suites</h1>
+
+<div id="suites">
+  <% @suites.each do |suite| %>
+    <%= render suite %>
+    <p>
+      <%= link_to "Show this suite", suite %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New suite", new_suite_path %>
