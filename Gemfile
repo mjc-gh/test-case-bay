@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.2'
 
 gem 'devise'
+gem 'inline_svg', '~> 1.7', github: 'mjc-gh/inline_svg'
 gem 'rails', '~> 7.0.4'
 gem 'responders'
 gem 'shakapacker', '~> 6.5'

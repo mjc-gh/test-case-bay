@@ -2,7 +2,7 @@
   <% c.header { @suite.title } -%>
 
   <% c.action do -%>
-    <%= link_to project_suites_path(@project) do %>
+    <%= link_to project_path(@project) do %>
       <%= render ButtonComponent.new(color: :clear).with_content 'Back' -%>
     <% end -%>
   <% end -%>

@@ -1,6 +1,7 @@
 achillas_app_qa:
   user: achilla_marsh
   title: App QA
+  suites_count: 1
 
 achillas_email_qa:
   user: achilla_marsh

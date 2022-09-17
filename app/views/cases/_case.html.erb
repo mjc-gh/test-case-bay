@@ -1,17 +1,15 @@
 <div id="<%= dom_id test_case %>">
-  <p>
-    <strong>Title:</strong>
-    <%= test_case.title %>
-  </p>
+  <p class="text-lg font-semibold"><%= test_case.title %></p>
+  <p class="text-sm text-gray-300"><%= test_case.acceptance_criteria %></p>
 
-  <p>
-    <strong>Description:</strong>
-    <%= test_case.description %>
-  </p>
-
-  <p>
-    <strong>Acceptance criteria:</strong>
-    <%= test_case.acceptance_criteria %>
-  </p>
-
+  <div class="text-sm text-gray-100 flex justify-between items-center flex-1 mt-4">
+    <% if test_case.steps_count.zero? -%>
+      <div class="text-red-300 flex items-center gap-1">
+        <%= inline_svg_tag 'icons/hero/exclamation_circle.svg', class: 'w-5 h-5' -%>
+        Add steps to case to continue
+      </div>
+    <% else -%>
+      <span>Steps: <%= test_case.steps_count -%></span>
+    <% end -%>
+  </div>
 </div>

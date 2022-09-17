@@ -13,8 +13,15 @@
   <body class="h-full min-h-full bg-zinc-800 text-white">
     <%= render 'shared/nav' -%>
 
-    <p style="color: green"><%= notice %></p>
-    <p style="color: red"><%= alert %></p>
+    <div class="max-w-screen-md mx-auto space-y-2">
+      <% if flash.key? :notice -%>
+        <%= render AlertComponent.new(type: :notice).with_content notice -%>
+      <% end -%>
+
+      <% if flash.key? :alert -%>
+        <%= render AlertComponent.new(type: :alert).with_content alert -%>
+      <% end -%>
+    </div>
 
     <%= yield %>
   </body>
