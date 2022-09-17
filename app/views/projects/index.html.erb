@@ -1,11 +1,19 @@
-<h1>Projects</h1>
+<%= render PageComponent.new do |c| -%>
+  <% c.header { 'Projects' } -%>
 
-<div id="projects">
-  <% @projects.each do |project| %>
-    <%= render project %>
+  <% c.action do -%>
+    <%= link_to new_project_path do %>
+      <%= render ButtonComponent.new.with_content 'New Project' -%>
+    <% end -%>
+  <% end -%>
 
-    <%= link_to project.title, project %>
-  <% end %>
-</div>
-
-<%= link_to "New project", new_project_path %>
+  <% render GridComponent.new(id: 'projects') do |gc| -%>
+    <% @projects.each do |project| %>
+      <% gc.item do -%>
+        <%= link_to project do -%>
+          <%= render project %>
+        <% end -%>
+      <% end -%>
+    <% end -%>
+  <% end -%>
+<% end -%>

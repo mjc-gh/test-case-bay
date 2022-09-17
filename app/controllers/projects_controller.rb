@@ -13,6 +13,8 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1
   def show
+    @suites = @project.suites.order('title').load
+
     respond_with @project
   end
 

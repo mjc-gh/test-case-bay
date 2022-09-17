@@ -7,15 +7,19 @@ class SuitesController < ApplicationController
   respond_to :html
 
   def show
+    @cases = @suite.cases.order('title').load
+
     respond_with @suite
   end
 
   def new
-    @suite = Suite.new
+    @suite = @project.suites.new
+
     respond_with @suite
   end
 
   def edit
+    respond_with @suite
   end
 
   def create

@@ -2,7 +2,9 @@
 
 class ButtonComponent < ViewComponent::Base
   HTML_COLOR_CLASSES = {
-    primary: 'bg-teal-600 text-white hover:bg-teal-700 focus:ring-teal-500'
+    primary: 'bg-teal-600 text-white hover:bg-teal-700 focus:ring-teal-500',
+    danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
+    clear: 'bg-transparent border-teal-500 text-teal-500 hover:text-teal-700 hover:border-teal-700',
   }
 
   HTML_SIZE_CLASSES = {
@@ -13,8 +15,9 @@ class ButtonComponent < ViewComponent::Base
     xlarge: 'px-6 py-3 text-base'
   }
 
-  def initialize(type: 'button', color: :primary)
+  def initialize(type: 'button', color: :primary, size: :medium, **kwargs)
     @type = type
+    @kwargs = kwargs
 
     @html_class = 'inline-flex items-center rounded border border-transparent shadow-sm font-medium '\
       'focus:outline-none focus:ring-2 focus:ring-offset-2 '\
@@ -22,6 +25,8 @@ class ButtonComponent < ViewComponent::Base
   end
 
   def call
-    tag.button type: @type, class: @html_class
+    tag.button type: @type, class: @html_class, **@kwargs do
+      content
+    end
   end
 end

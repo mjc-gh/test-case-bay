@@ -1,10 +1,31 @@
-<p style="color: green"><%= notice %></p>
+<%= render PageComponent.new do |c| -%>
+  <% c.header { "#{@project.title} Suites" } -%>
 
-<%= render @project %>
+  <% c.action do -%>
+    <%= link_to projects_path do %>
+      <%= render ButtonComponent.new(color: :clear).with_content 'Back' -%>
+    <% end -%>
+  <% end -%>
 
-<div>
-  <%= link_to "Edit this project", edit_project_path(@project) %> |
-  <%= link_to "Back to projects", projects_path %>
+  <% c.action do -%>
+    <%= link_to edit_project_path(@project) do %>
+      <%= render ButtonComponent.new.with_content 'Edit' -%>
+    <% end -%>
+  <% end -%>
 
-  <%= button_to "Destroy this project", @project, method: :delete %>
-</div>
+  <% c.action do -%>
+    <%= form_with model: @project, method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: 'inline' do -%>
+      <%= render ButtonComponent.new(type: 'submit', color: :danger).with_content 'Delete' -%>
+    <% end -%>
+  <% end -%>
+
+  <% render GridComponent.new(id: 'projects') do |gc| -%>
+    <% @suites.each do |suite| %>
+      <% gc.item do -%>
+        <% link_to [@project, suite] do -%>
+          <%= render suite -%>
+        <% end -%>
+      <% end -%>
+    <% end -%>
+  <% end -%>
+<% end -%>

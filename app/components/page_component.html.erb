@@ -1,0 +1,15 @@
+<main class="max-w-screen-xl mx-auto px-2">
+  <div class="flex justify-between items-centers">
+    <h1 class="text-3xl"><%= header -%></h1>
+
+    <div class="space-x-2">
+      <% actions.each do |action| -%>
+        <%= action -%>
+      <% end -%>
+    </div>
+  </div>
+
+  <div class="my-4">
+    <%= content -%>
+  </div>
+</main>

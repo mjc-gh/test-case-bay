@@ -1,12 +1,7 @@
 <div id="<%= dom_id suite %>">
-  <p>
-    <strong>Title:</strong>
-    <%= suite.title %>
-  </p>
+  <p class="text-lg font-semibold"><%= suite.title %></p>
 
-  <p>
-    <strong>Description:</strong>
-    <%= suite.description %>
-  </p>
-
+  <div class="text-sm text-gray-100 flex justify-between items-center flex-1 mt-4">
+    <span>Cases: <%= suite.cases_count -%></span>
+  </div>
 </div>
