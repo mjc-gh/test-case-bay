@@ -15,16 +15,16 @@
       <dt class="text-sm font-medium text-gray-300">Assignments</dt>
       <dd class="mt-1 text-sm text-white sm:col-span-2 sm:mt-0">
         <% if @assignments.any? -%>
-          <ul class="list-outside list-disc mb-5">
+          <ul class="list-outside list-disc mb-5 space-y-2">
             <% @assignments.each do |assignment| -%>
               <li>
-                <%= link_to run_assignment_path(run, assignment) do -%>
+                <%= link_to run_assignment_path(run, assignment), class: 'flex justify-between items-center' do -%>
                   <span class="text-base"><%= assignment.email -%></span>
                   <span class="text-sm text-gray-300"><%= l assignment.created_at, format: :short -%></span>
                 <% end -%>
 
-                <div class="flex gap-2 items-center text-gray-300">
-                  <%= link_to 'Public URL', assignment_path(assignment.token) -%>
+                <div class="flex gap-2 items-center justify-end text-gray-300">
+                  <%= link_to 'Assignment URL', assignment_path(assignment.token) -%>
                   <div class="relative"
                        data-controller="clipboard"
                        data-clipboard-copy-value="<%= assignment_url(assignment.token) -%>">
