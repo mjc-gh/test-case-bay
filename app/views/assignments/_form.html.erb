@@ -4,6 +4,11 @@
   <div class="field">
     <%= form.label :email %>
     <%= form.email_field :email -%>
+
+    <div class="prose prose-sm prose-invert mt-1">
+      <p class="text-gray-300">We'll send a unique Assignment URL to this email where. Tests are marked as PASSED or FAILED from Assignment page. You'll be able to view this page and copy the unique URL from the Test Run page at any time.</p>
+      <p class="text-gray-300">Remember, you can always assign yourself to try things out!</p>
+    </div>
   </div>
 
   <%= render ButtonComponent.new(type: 'submit').with_content 'Assign' -%>
