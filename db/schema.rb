@@ -10,7 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_18_005302) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_18_034015) do
+  create_table "assignment_cases", force: :cascade do |t|
+    t.integer "assignment_id", null: false
+    t.integer "case_id", null: false
+    t.boolean "completed", default: false, null: false
+    t.boolean "passed", default: false
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assignment_id"], name: "index_assignment_cases_on_assignment_id"
+    t.index ["case_id"], name: "index_assignment_cases_on_case_id"
+  end
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer "run_id", null: false
+    t.string "token"
+    t.string "email"
+    t.boolean "completed", default: false, null: false
+    t.boolean "passed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["run_id"], name: "index_assignments_on_run_id"
+  end
+
   create_table "case_runs", force: :cascade do |t|
     t.integer "case_id", null: false
     t.integer "run_id", null: false
@@ -95,6 +118,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_18_005302) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "assignment_cases", "assignments"
+  add_foreign_key "assignment_cases", "cases"
+  add_foreign_key "assignments", "runs"
   add_foreign_key "case_runs", "cases"
   add_foreign_key "case_runs", "runs"
   add_foreign_key "case_steps", "cases"

@@ -14,4 +14,10 @@ class ApplicationController < ActionController::Base
   def set_project
     @project = current_user.projects.find(params[:project_id])
   end
+
+  def set_run
+    @run = Run.joins(:project)
+      .where('projects.user_id = ?', current_user.id)
+      .find_by!(id: params[:run_id])
+  end
 end

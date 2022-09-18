@@ -1,0 +1,11 @@
+<%= render PageComponent.new do |c| -%>
+  <% c.header { "Assign #{@run.title}" } -%>
+
+  <% c.action do -%>
+    <%= link_to run_path(@run) do %>
+      <%= render ButtonComponent.new(color: :clear).with_content 'Back' -%>
+    <% end -%>
+  <% end -%>
+
+  <%= render 'form', run: @run, assignment: @assignment -%>
+<% end -%>

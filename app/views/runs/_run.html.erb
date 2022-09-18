@@ -1,12 +1,15 @@
 <div id="<%= dom_id run %>">
-  <p>
-    <strong>Title:</strong>
-    <%= run.title %>
-  </p>
+  <p class="text-lg font-semibold"><%= run.title %></p>
+  <p class="text-sm text-gray-300"><%= truncate run.description %></p>
 
-  <p>
-    <strong>Case runs count:</strong>
-    <%= run.case_runs_count %>
-  </p>
-
+  <div class="text-sm text-gray-100 flex justify-between items-center flex-1 mt-4">
+    <% if run.case_runs_count.zero? -%>
+      <div class="text-red-300 flex items-center gap-1">
+        <%= inline_svg_tag 'icons/hero/exclamation_circle.svg', class: 'w-5 h-5' -%>
+        Add cases to continue
+      </div>
+    <% else -%>
+      <span>Cases: <%= run.case_runs_count -%></span>
+    <% end -%>
+  </div>
 </div>

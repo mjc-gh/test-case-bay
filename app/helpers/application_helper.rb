@@ -9,4 +9,12 @@ module ApplicationHelper
 
     index == total - 1 ? :last : :middle
   end
+
+  def nav_link(url, &block)
+    if current_page?(url)
+      tag.span class: 'text-teal-600 text-lg font-semibold', &block
+    else
+      link_to url, class: 'text-teal-400 text-lg hover:underline', &block
+    end
+  end
 end

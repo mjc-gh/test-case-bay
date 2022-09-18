@@ -1,20 +1,22 @@
 <nav class="border-b-2 border-teal-900 py-4 mb-4">
   <div class="max-w-screen-xl mx-auto px-2 flex justify-between">
-    <h1 class="text-4xl text-center">Test Case Bay</h1>
+    <h1 class="text-4xl text-center">
+      <a href="/">Test Case Bay</a>
+    </h1>
 
     <% if user_signed_in? -%>
       <ul class="flex gap-10 justify-center items-center pt-2">
-        <li><%= link_to 'Runs', runs_path, class: 'text-teal-400 text-lg hover:underline' -%></li>
-        <li><%= link_to 'Projects', projects_path, class: 'text-teal-400 text-lg hover:underline' -%></li>
-        <li><%= link_to 'Account', '#', class: 'text-teal-400 text-lg hover:underline' -%></li>
+        <li><%= nav_link(runs_path) { 'Runs' } -%></li>
+        <li><%= nav_link(projects_path) { 'Projects' } -%></li>
+        <li><%= nav_link(edit_user_registration_path) { 'Account' } -%></li>
 
         <li><%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'text-red-300 text-lg hover:underline' -%></li>
       </ul>
 
     <% else -%>
       <ul class="flex gap-10 justify-center items-center pt-2">
-        <li><%= link_to 'Sign Up', new_user_registration_path, class: 'text-teal-400 text-lg hover:underline' -%></li>
-        <li><%= link_to 'Log In', new_user_session_path, class: 'text-teal-400 text-lg hover:underline' -%></li>
+        <li><%= nav_link(new_user_registration_path) { 'Sign Up' } -%></li>
+        <li><%= nav_link(new_user_session_path) { 'Log In' } -%></li>
       </ul>
     <% end -%>
   </div>

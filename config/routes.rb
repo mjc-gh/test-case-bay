@@ -34,5 +34,7 @@ Rails.application.routes.draw do
         patch :reorder
       end
     end
+
+    resources :assignments, only: %i[new create]
   end
 end

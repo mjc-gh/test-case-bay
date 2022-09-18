@@ -50,12 +50,6 @@ class CaseRunsController < ApplicationController
     params.permit(:direction)
   end
 
-  def set_run
-    @run = Run.joins(:project)
-      .where('projects.user_id = ?', current_user.id)
-      .find_by!(id: params[:run_id])
-  end
-
   def set_case
     @case = @run.project.cases.find_by!(id: params[:id])
   end
