@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="h-full min-h-full">
   <head>
-    <title>TestCaseBay</title>
+    <title>Test Case Bay - <%= controller_name.titleize %> <%= action_name.titleize -%></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,7 +10,7 @@
     <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
   </head>
 
-  <body class="h-full min-h-full bg-zinc-800 text-white">
+  <body class="h-full min-h-full bg-zinc-800 text-white" data-controller="application">
     <%= render 'shared/nav' -%>
 
     <div class="max-w-screen-md mx-auto space-y-2 relative overflow-hidden min-h-[56px]">

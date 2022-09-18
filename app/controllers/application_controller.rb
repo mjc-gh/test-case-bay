@@ -7,8 +7,20 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
+  around_action :set_timezone, if: :user_signed_in?
+
+  private
+
   def not_found
     render :not_found, status: :not_found
+  end
+
+  def set_timezone
+    tz = cookies.fetch('TZ') { 'UTC' }
+
+    Time.use_zone tz do
+      yield
+    end
   end
 
   def set_project
