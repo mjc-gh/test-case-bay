@@ -1,0 +1,26 @@
+<%= render PageComponent.new do |c| -%>
+  <% c.header { @assignment.run.title } -%>
+
+  <% c.sub_header do -%>
+    <p class="text-lg text-gray-300">You have been assigned to perform the following Test cases and steps</p>
+  <% end -%>
+
+  <div class="pl-4">
+    <ol class="list-outside list-decimal space-y-10 max-w-screen-md">
+      <% @cases.each do |test_case| -%>
+        <%= render OrderedCaseComponent.new(run: @run, test_case: test_case) do -%>
+          <%= turbo_frame_tag dom_id(test_case, :steps) do -%>
+            <div class="flex justify-end">
+              <%= link_to assignment_case_steps_path(@assignment.token, test_case) do -%>
+                <%= render ButtonComponent.new(color: :clear, size: :xsmall) do -%>
+                  <span class="mr-2">Show Test Steps</span>
+                  <%= inline_svg_tag 'icons/hero/chevron_down.svg', class: 'w-4 h-4' -%>
+                <% end -%>
+              <% end -%>
+            </div>
+          <% end -%>
+        <% end -%>
+      <% end -%>
+    </ol>
+  </div>
+<% end -%>

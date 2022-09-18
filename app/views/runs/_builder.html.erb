@@ -5,14 +5,46 @@
       <dt class="text-sm font-medium text-gray-300">Project</dt>
       <dd class="mt-1 text-sm text-white sm:col-span-2 sm:mt-0"><%= run.project.title -%></dd>
     </div>
-    <div>
     <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
       <dt class="text-sm font-medium text-gray-300">Description</dt>
       <dd class="mt-1 text-sm text-white sm:col-span-2 sm:mt-0">
         <%= run.description.blank? ? tag.span(class: 'text-rose-200') { 'None Provided' } : run.description -%>
       </dd>
     </div>
-    <div>
+    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+      <dt class="text-sm font-medium text-gray-300">Assignments</dt>
+      <dd class="mt-1 text-sm text-white sm:col-span-2 sm:mt-0">
+        <% if @assignments.any? -%>
+          <ul class="list-outside list-disc mb-5">
+            <% @assignments.each do |assignment| -%>
+              <li>
+                <%= link_to run_assignment_path(run, assignment) do -%>
+                  <span class="text-base"><%= assignment.email -%></span>
+                  <span class="text-sm text-gray-300"><%= l assignment.created_at, format: :short -%></span>
+                <% end -%>
+
+                <div class="flex gap-2 items-center text-gray-300">
+                  <%= link_to 'Public URL', assignment_path(assignment.token) -%>
+                  <div class="relative"
+                       data-controller="clipboard"
+                       data-clipboard-copy-value="<%= assignment_url(assignment.token) -%>">
+                       <button data-action="clipboard#copy">
+                         <%= inline_svg_tag 'icons/hero/clipboard.svg', class: 'h-5 w-5 text-white hover:text-teal-500' -%>
+                         <%= inline_svg_tag 'icons/hero/clipboard_document.svg',
+                           class: 'absolute opacity-0 -inset-0 transition-opacity h-5 w-5 text-white bg-zinc-800 hover:text-teal-500', data: { clipboard_target: 'indicator' } -%>
+                       </button>
+                  </div>
+                </div>
+              </li>
+            <% end -%>
+          </ul>
+        <% end -%>
+
+        <%= link_to new_run_assignment_path(@run) do -%>
+          <%= render ButtonComponent.new(color: :clear, size: :xsmall).with_content 'New Assignment' -%>
+        <% end -%>
+      </dd>
+    </div>
   </dl>
 
   <div class="space-y-6">

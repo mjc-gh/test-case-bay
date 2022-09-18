@@ -16,6 +16,7 @@ class RunsController < ApplicationController
 
   def show
     @ordered_cases = @run.cases.order(:row_order).load
+    @assignments = @run.assignments.order(:created_at).load
 
     respond_with @run
   end

@@ -35,6 +35,13 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :assignments, only: %i[new create]
+    resources :assignments, only: %i[new create show]
+  end
+
+  # Public assignment resource using the token as the :id
+  resources :assignments, only: :show do
+    resources :cases, only: [] do
+      resources :steps, only: %i[index update], controller: 'assignment_case_steps'
+    end
   end
 end

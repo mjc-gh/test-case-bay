@@ -1,14 +1,6 @@
 <%= render PageComponent.new do |c| -%>
   <% c.header { @run.title } -%>
 
-  <% c.sub_header do -%>
-    <div class="mt-2">
-      <%= link_to new_run_assignment_path(@run) do -%>
-        <%= render ButtonComponent.new.with_content 'Assign' -%>
-      <% end -%>
-    </div>
-  <% end -%>
-
   <% c.action do -%>
     <%= link_to runs_path do %>
       <%= render ButtonComponent.new(color: :clear).with_content 'Back' -%>

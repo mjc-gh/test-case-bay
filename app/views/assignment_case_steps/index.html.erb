@@ -1,0 +1,12 @@
+<%= turbo_frame_tag dom_id(@case, :steps) do -%>
+  <ol class="list-outside list-decimal space-y-2">
+    <% @steps.each.with_index do |step, index| -%>
+      <%= render OrderedStepComponent.new(step: step, test_case: @case) do -%>
+      <% end -%>
+    <% end -%>
+  </ol>
+
+  <% if @steps.empty? -%>
+    <p class="my-6 mx-2 text-red-200">No steps were included in this case. Please let your Test Manager know they missed a spot.
+  <% end -%>
+<% end -%>

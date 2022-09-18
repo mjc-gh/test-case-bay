@@ -16,7 +16,7 @@ class AssignmentsControllerTest < ActionDispatch::IntegrationTest
   test 'post create' do
     sign_in users(:achilla_marsh)
 
-    assert_changes -> { @run.assignments.count } do
+    assert_changes -> { @run.reload.assignments_count } do
       post run_assignments_path(@run), params: {
         assignment: { email: 'tester@example.com' }
       }, as: :turbo_confirm
