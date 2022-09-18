@@ -35,7 +35,12 @@ class RunsController < ApplicationController
     @project = current_user.projects.find_by!(id: run_params[:project_id])
     @run = @project.runs.create(run_params.to_h.without(:project_id))
 
-    respond_with(@run)
+    respond_with @run
+  rescue ActiveRecord::RecordNotFound => e
+    @run = Run.new
+    @run.errors.add :project_id, :invalid
+
+    respond_with @run
   end
 
   def update

@@ -4,16 +4,17 @@
     <dl class="sm:divide-y sm:divide-gray-200 max-w-screen-sm">
       <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
         <dt class="text-sm font-medium text-gray-300">Description</dt>
-        <dd class="mt-1 text-sm text-white sm:col-span-2 sm:mt-0"><%= test_case.description || tag.span(class: 'text-rose-200') { 'None Provided' } -%></dd>
+        <dd class="mt-1 text-sm text-white sm:col-span-2 sm:mt-0"><%= data_definition test_case, :description -%></dd>
       </div>
       <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
         <dt class="text-sm font-medium text-gray-300">Acceptance Criteria</dt>
-        <dd class="mt-1 text-sm text-white sm:col-span-2 sm:mt-0"><%= test_case.acceptance_criteria -%></dd>
+        <dd class="mt-1 text-sm text-white sm:col-span-2 sm:mt-0"><%= data_definition test_case, :acceptance_criteria -%></dd>
       </div>
   </div>
 
   <div class="space-y-6">
     <h2 class="text-xl">Steps</h2>
+    <p class="text-sm text-gray-300">Add existing steps from this Project or create new ones below:</p>
     <div class="pl-4" data-controller="case-step-builder">
       <ol id="<%= dom_id test_case, :steps -%>" class="list-outside list-decimal space-y-3 max-w-screen-md">
         <% ordered_steps.each.with_index do |step, index| -%>

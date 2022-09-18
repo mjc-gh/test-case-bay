@@ -27,11 +27,18 @@
     <% end -%>
   <% end -%>
 
-  <% render GridComponent.new(id: 'projects') do |gc| -%>
-    <% @cases.each do |test_case| %>
-      <% gc.item do -%>
-        <% link_to [@project, @suite, test_case] do -%>
-          <%= render 'cases/case', test_case: test_case -%>
+  <% if @cases.empty? -%>
+    <div class="text-rose-200 text-base my-12 justify-center text-center">
+      <p>You have no test cases yet!</p>
+      <p>Add a new case to and start adding test steps.</p>
+    </div>
+  <% else -%>
+    <% render GridComponent.new(id: 'projects') do |gc| -%>
+      <% @cases.each do |test_case| %>
+        <% gc.item do -%>
+          <% link_to [@project, @suite, test_case] do -%>
+            <%= render 'cases/case', test_case: test_case -%>
+          <% end -%>
         <% end -%>
       <% end -%>
     <% end -%>

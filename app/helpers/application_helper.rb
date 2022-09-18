@@ -17,4 +17,11 @@ module ApplicationHelper
       link_to url, class: 'text-teal-400 text-lg hover:underline', &block
     end
   end
+
+  def data_definition(record, attribute)
+    value = record[attribute]
+    return value unless value.blank?
+
+    tag.span(class: 'text-rose-200') { 'None Provided' }
+  end
 end

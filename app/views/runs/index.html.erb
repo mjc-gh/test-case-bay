@@ -7,13 +7,20 @@
     <% end -%>
   <% end -%>
 
-  <% render GridComponent.new(id: 'projects') do |gc| -%>
-    <% @runs.each do |run| %>
-      <% gc.item do -%>
-        <%= link_to run do -%>
-          <%= render run %>
-        <% end -%>
-      <% end %>
+  <% if @runs.empty? -%>
+    <div class="text-rose-200 text-base my-12 justify-center text-center">
+      <p>You have no runs yet!</p>
+      <p>Runs lets you add test cases in order and assign their execution to one or more users.</p>
+    </div>
+  <% else -%>
+    <% render GridComponent.new(id: 'projects') do |gc| -%>
+      <% @runs.each do |run| %>
+        <% gc.item do -%>
+          <%= link_to run do -%>
+            <%= render run %>
+          <% end -%>
+        <% end %>
+      <% end -%>
     <% end -%>
   <% end -%>
 <% end -%>
