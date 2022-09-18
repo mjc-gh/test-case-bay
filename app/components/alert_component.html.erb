@@ -1,10 +1,14 @@
-<div class="rounded-md p-4 <%= @html_class %>">
-  <div class="flex">
-    <div class="flex-shrink-0">
+<div class="transition-all rounded-md p-4 transform <%= @html_class %>" data-controller="alert">
+  <div class="flex items-start">
+    <div class="flex-shrink-0 mt-1">
       <%= helpers.inline_svg_tag "icons/hero/#{@svg_icon}", class: "h-5 w-5 #{@svg_icon_html_class}" -%>
     </div>
-    <div class="ml-3 flex-1 md:flex md:justify-between">
+    <div class="ml-3 flex-1 overflow-hidden md:flex md:justify-between">
       <p class="text-sm"><%= content -%></p>
     </div>
+    <button class="ml-2 mt-1" data-action="alert#close">
+      <%= helpers.inline_svg_tag 'icons/hero/x_circle.svg', class: 'w-4 h-4' -%>
+      <span class="sr-only">Close</span>
+    </button>
   </div>
 </div>

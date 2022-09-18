@@ -1,4 +1,10 @@
-<%= turbo_stream.before dom_id(@run, :last_li) do -%>
-  <%= render 'case_runs/builder_item', run: @run, test_case: @case,
-    position: @run.cases.count == 1 ? :single : :last -%>
+<% @cases.each.with_index do |test_case| -%>
+  <%= turbo_stream.remove dom_id(@run, dom_id(test_case)) -%>
+<% end -%>
+
+<%= turbo_stream.prepend dom_id(@run, :cases) do -%>
+  <% @cases.each.with_index do |test_case, index| -%>
+    <%= render 'case_runs/builder_item', run: @run, test_case: test_case,
+      position: position_from_index(index, @cases.size) -%>
+  <% end -%>
 <% end -%>

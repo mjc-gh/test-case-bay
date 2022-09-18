@@ -8,6 +8,14 @@ class CaseStepsControllerTest < ActionDispatch::IntegrationTest
     @step = @case_step.step
   end
 
+  def assert_turbo_stream_reorder
+    @case.steps.each do |step|
+      assert_turbo_stream action: :remove, target: dom_id(step, dom_id(@case))
+    end
+
+    assert_turbo_stream action: :prepend, target: dom_id(@case, :steps)
+  end
+
   test 'post create with invalid params' do
     sign_in users(:achilla_marsh)
 
@@ -25,8 +33,8 @@ class CaseStepsControllerTest < ActionDispatch::IntegrationTest
       step: { title: @step.title, acceptance_criteria: @step.acceptance_criteria }
     }, as: :turbo_stream
 
-    assert_turbo_stream action: :before, target: dom_id(@case, :last_li)
     assert_turbo_stream action: :update, target: dom_id(@case, :builder)
+    assert_turbo_stream_reorder
   end
 
   test 'patch reorder move 2nd step to 1st' do
@@ -40,8 +48,7 @@ class CaseStepsControllerTest < ActionDispatch::IntegrationTest
       }, as: :turbo_stream
     end
 
-    assert_turbo_stream action: :remove, target: dom_id(case_step.step, dom_id(@case))
-    assert_turbo_stream action: :prepend, target: dom_id(@case, :steps)
+    assert_turbo_stream_reorder
   end
 
   test 'patch reorder move 1st to 2nd' do
@@ -53,10 +60,7 @@ class CaseStepsControllerTest < ActionDispatch::IntegrationTest
       }, as: :turbo_stream
     end
 
-    prior_step = case_steps(:app_qa_onboarding_new_step_2).step
-
-    assert_turbo_stream action: :remove, target: dom_id(@step, dom_id(@case))
-    assert_turbo_stream action: :after, target: dom_id(prior_step, dom_id(@case))
+    assert_turbo_stream_reorder
   end
 
   test 'post append as turbo stream' do
@@ -72,7 +76,7 @@ class CaseStepsControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal @case.steps.order(:row_order).last, new_step
 
-    assert_turbo_stream action: :before, target: dom_id(@case, :last_li)
+    assert_turbo_stream_reorder
   end
 
   test 'delete destroy as turbo stream' do

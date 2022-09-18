@@ -1,10 +1,15 @@
-<h1>Editing suite</h1>
+<%= render PageComponent.new do |c| -%>
+  <% c.header { 'Edit Suite' } -%>
 
-<%= render "form", project: @project, suite: @suite %>
+  <% c.sub_header do -%>
+    <p class="text-gray-300 text-lg"><%= @project.title -%><p>
+  <% end -%>
 
-<br>
+  <% c.action do -%>
+    <%= link_to project_suite_path(@project, @suite) do %>
+      <%= render ButtonComponent.new(color: :clear).with_content 'Back' -%>
+    <% end -%>
+  <% end -%>
 
-<div>
-  <%= link_to "Show this suite", [@project, @suite] %> |
-  <%= link_to "Back to suites", @project %>
-</div>
+  <%= render "form", project: @project, suite: @suite %>
+<% end -%>

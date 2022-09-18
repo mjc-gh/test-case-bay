@@ -44,4 +44,6 @@ Rails.application.routes.draw do
       resources :steps, only: %i[index edit update], controller: 'assignment_case_steps'
     end
   end
+
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

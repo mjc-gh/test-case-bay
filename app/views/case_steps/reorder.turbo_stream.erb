@@ -1,11 +1,10 @@
-<%= turbo_stream.remove dom_id(@step, dom_id(@case)) -%>
+<% @steps.each.with_index do |step| -%>
+  <%= turbo_stream.remove dom_id(step, dom_id(@case)) -%>
+<% end -%>
 
-<% if @step_index <= 0 -%>
-  <%= turbo_stream.prepend dom_id(@case, :steps) do -%>
-    <%= render 'case_steps/builder_item', test_case: @case, step: @step, position: :first -%>
-  <% end -%>
-<% else -%>
-  <%= turbo_stream.after "#{dom_id(@case)}_step_#{@step_ids[@step_index - 1]}" do -%>
-    <%= render 'case_steps/builder_item', test_case: @case, step: @step, position: @step_index < @step_ids.size - 1 ? :middle : :last -%>
+<%= turbo_stream.prepend dom_id(@case, :steps) do -%>
+  <% @steps.each.with_index do |step, index| -%>
+    <%= render 'case_steps/builder_item', test_case: @case, step: step,
+      position: position_from_index(index, @steps.size) -%>
   <% end -%>
 <% end -%>

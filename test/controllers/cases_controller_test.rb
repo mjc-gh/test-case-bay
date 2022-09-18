@@ -42,6 +42,15 @@ class CasesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'patch update case invalid' do
+    sign_in users(:achilla_marsh)
+
+    patch project_suite_case_path(@project, @suite, @case), params: {
+      case: { acceptance_criteria: '' } }
+
+    assert_redirected_to project_suite_case_path(@project, @suite, @case)
+  end
+
   test 'patch update case' do
     sign_in users(:achilla_marsh)
 

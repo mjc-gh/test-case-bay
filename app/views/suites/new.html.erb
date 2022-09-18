@@ -1,9 +1,15 @@
-<h1>New suite</h1>
+<%= render PageComponent.new do |c| -%>
+  <% c.header { 'New Suite' } -%>
 
-<%= render "form", project: @project, suite: @suite %>
+  <% c.sub_header do -%>
+    <p class="text-gray-300 text-lg"><%= @project.title -%><p>
+  <% end -%>
 
-<br>
+  <% c.action do -%>
+    <%= link_to project_path(@project) do %>
+      <%= render ButtonComponent.new(color: :clear).with_content 'Back' -%>
+    <% end -%>
+  <% end -%>
 
-<div>
-  <%= link_to "Back to suites", project_suites_path(@project) %>
-</div>
+  <%= render "form", project: @project, suite: @suite %>
+<% end -%>

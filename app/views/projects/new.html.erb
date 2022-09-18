@@ -1,9 +1,11 @@
-<h1>New project</h1>
+<%= render PageComponent.new do |c| -%>
+  <% c.header { 'New Project' } -%>
 
-<%= render "form", project: @project %>
+  <% c.action do -%>
+    <%= link_to projects_path do %>
+      <%= render ButtonComponent.new(color: :clear).with_content 'Back' -%>
+    <% end -%>
+  <% end -%>
 
-<br>
-
-<div>
-  <%= link_to "Back to projects", projects_path %>
-</div>
+  <%= render "form", project: @project %>
+<% end -%>

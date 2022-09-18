@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/fgrehm/letter_opener_web.git
+  revision: 026d5e0594221143126b9118222aa458eb8f4e3c
+  specs:
+    letter_opener_web (2.0.0)
+      actionmailer (>= 5.2)
+      letter_opener (~> 1.7)
+      railties (>= 5.2)
+      rexml
+
+GIT
   remote: https://github.com/mjc-gh/inline_svg.git
   revision: f271f16de85864d9071139f850ae097bb415e3d7
   specs:
@@ -74,6 +84,8 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     bcrypt (3.1.18)
     bindex (0.8.1)
     bootsnap (1.13.0)
@@ -115,6 +127,10 @@ GEM
     io-console (0.5.11)
     irb (1.4.1)
       reline (>= 0.3.0)
+    launchy (2.5.0)
+      addressable (~> 2.7)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -155,6 +171,7 @@ GEM
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    public_suffix (5.0.0)
     puma (5.6.5)
       nio4r (~> 2.0)
     racc (1.6.0)
@@ -200,6 +217,7 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rexml (3.2.5)
     semantic_range (3.0.0)
     shakapacker (6.5.2)
       activesupport (>= 5.2)
@@ -250,6 +268,7 @@ DEPENDENCIES
   guard
   guard-minitest
   inline_svg (~> 1.7)!
+  letter_opener_web!
   pg
   pry
   puma (~> 5.0)

@@ -1,10 +1,10 @@
-<%= form_with model: assignment, url: run_assignments_path(run) do |form| %>
-  <div>
-    <%= form.label :email, style: "display: block" %>
+<%= form_with model: assignment, url: run_assignments_path(run), data: { turbo: false } do |form| %>
+  <%= model_errors assignment -%>
+
+  <div class="field">
+    <%= form.label :email %>
     <%= form.email_field :email -%>
   </div>
-
-  <%= model_errors assignment -%>
 
   <%= render ButtonComponent.new(type: 'submit').with_content 'Assign' -%>
 <% end -%>

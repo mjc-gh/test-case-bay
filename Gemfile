@@ -36,6 +36,8 @@ group :development do
   gem 'guard'
   gem 'guard-minitest'
 
+  gem 'letter_opener_web', github: 'fgrehm/letter_opener_web'
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem 'rack-mini-profiler'
 end

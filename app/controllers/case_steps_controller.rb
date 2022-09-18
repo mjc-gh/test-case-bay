@@ -35,6 +35,7 @@ class CaseStepsController < ApplicationController
       @step.save
 
       @case_step = @case.case_steps.create(step: @step, row_order_position: :last)
+      @steps = @case.steps.order(:row_order).load
     end
 
     respond_with @step, render: :create
@@ -42,6 +43,7 @@ class CaseStepsController < ApplicationController
 
   def append
     @case_step = @case.steps << @step
+    @steps = @case.steps.order(:row_order).load
 
     respond_with @step, render: :append
   end
@@ -50,10 +52,7 @@ class CaseStepsController < ApplicationController
     direction = reorder_params[:direction] == 'down' ? :down : :up
 
     @case_step.update(row_order_position: direction)
-
-    # TODO do this better within the DB...
-    @step_ids = @case.steps.reload.order(:row_order).pluck(:step_id)
-    @step_index = @step_ids.index(@step.id)
+    @steps = @case.steps.order(:row_order).load
 
     respond_with @case_step, render: :reorder
   end

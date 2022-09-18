@@ -19,6 +19,7 @@ class CaseRunsController < ApplicationController
 
   def append
     @run_case = @run.cases << @case
+    @cases = @run.cases.order(:row_order).load
 
     respond_with @case, render: :append
   end

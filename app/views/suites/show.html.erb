@@ -7,6 +7,14 @@
     <% end -%>
   <% end -%>
 
+  <% c.sub_header do -%>
+    <div class="mt-2">
+      <%= link_to new_project_suite_case_path(@project, @suite) do -%>
+        <%= render ButtonComponent.new(size: :large).with_content 'New Case'-%>
+      <% end -%>
+    </div>
+  <% end -%>
+
   <% c.action do -%>
     <%= link_to edit_project_suite_path(@project, @suite) do %>
       <%= render ButtonComponent.new.with_content 'Edit' -%>

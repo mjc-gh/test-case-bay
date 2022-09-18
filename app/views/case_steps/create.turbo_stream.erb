@@ -1,8 +1,14 @@
-<%= turbo_stream.before dom_id(@case, :last_li) do -%>
-  <%= render 'case_steps/builder_item', test_case: @case, step: @step,
-    position: @case.steps.count == 1 ? :single : :last -%>
-<% end -%>
-
 <%= turbo_stream.update dom_id(@case, :builder) do -%>
   <%= render 'case_steps/form', test_case: @case -%>
+<% end -%>
+
+<% @steps.each.with_index do |step| -%>
+  <%= turbo_stream.remove dom_id(step, dom_id(@case)) -%>
+<% end -%>
+
+<%= turbo_stream.prepend dom_id(@case, :steps) do -%>
+  <% @steps.each.with_index do |step, index| -%>
+    <%= render 'case_steps/builder_item', test_case: @case, step: step,
+      position: position_from_index(index, @steps.size) -%>
+  <% end -%>
 <% end -%>

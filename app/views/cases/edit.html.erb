@@ -1,10 +1,11 @@
-<h1>Editing case</h1>
+<%= render PageComponent.new do |c| -%>
+  <% c.header { 'Edit Case' } -%>
 
-<%= render "form", project: @project, suite: @suite, test_case: @case %>
+  <% c.action do -%>
+    <%= link_to project_suite_case_path(@project, @suite, @case) do %>
+      <%= render ButtonComponent.new(color: :clear).with_content 'Back' -%>
+    <% end -%>
+  <% end -%>
 
-<br>
-
-<div>
-  <%= link_to "Show this case", [@project, @suite, @case] %> |
-  <%= link_to "Back to suite", [@project, @suite] %>
-</div>
+  <%= render "form", project: @project, suite: @suite, test_case: @case %>
+<% end -%>

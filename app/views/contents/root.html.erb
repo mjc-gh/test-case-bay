@@ -11,6 +11,8 @@
       <li>Steps are shared throughout the Project to reduce redundancy and save you lots of typing!</li>
     </ul>
 
-    <p>Won't you get started today by <%= link_to 'Signing Up', new_user_session_path -%>!</p>
+    <% unless user_signed_in? -%>
+      <p>Won't you get started today by <%= link_to 'Signing Up', new_user_session_path -%>!</p>
+    <% end -%>
   </div>
 <% end -%>

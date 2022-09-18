@@ -1,10 +1,11 @@
-<h1>Editing run</h1>
+<%= render PageComponent.new do |c| -%>
+  <% c.header { 'Edit Run' } -%>
 
-<%= render "form", run: @run %>
+  <% c.action do -%>
+    <%= link_to run_path(@run) do %>
+      <%= render ButtonComponent.new(color: :clear).with_content 'Back' -%>
+    <% end -%>
+  <% end -%>
 
-<br>
-
-<div>
-  <%= link_to "Show this run", @run %> |
-  <%= link_to "Back to runs", runs_path %>
-</div>
+  <%= render "form", run: @run %>
+<% end -%>

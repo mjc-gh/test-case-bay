@@ -1,22 +1,24 @@
-<%= form_with(model: run) do |form| %>
+<%= form_with(model: run, data: { turbo: false }) do |form| %>
+  <%= model_errors run -%>
+
   <% if run.new_record? -%>
-    <div>
-      <%= form.label :project_id, style: "display: block" %>
+    <div class="field">
+      <%= form.label :project_id %>
       <%= form.select :project_id, @projects.map { |p| [ p.title, p.id ] } %>
     </div>
   <% end -%>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
+  <div class="field">
+    <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
+  <div class="field">
+    <%= form.label :description %>
     <%= form.text_area :description %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="actions">
+    <%= render ButtonComponent.new(type: 'submit').with_content 'Save Run' -%>
   </div>
 <% end %>
