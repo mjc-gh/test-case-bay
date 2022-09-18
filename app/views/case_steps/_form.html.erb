@@ -3,13 +3,20 @@
        name="text"
        placeholder="Search or create steps..."
        data-case-step-builder-target="search"
-       data-action="case-step-builder#update"
+       data-action="case-step-builder#change"
        class="pr-24" />
 
+<!-- used for building new Step -->
 <%= form_with model: Step.new, url: add_new_case_steps_path(test_case) do |form| -%>
-  <%= form.hidden_field :title, data: { case_step_builder_target: 'newTitle' } -%>
+  <%= form.hidden_field :title, data: { case_step_builder_target: 'titleField' } -%>
 
   <div class="absolute right-1 top-1/2 transform -translate-y-1/2 opacity-0 transition-opacity" data-case-step-builder-target="newButton">
     <%= render ButtonComponent.new(type: 'submit', size: :xsmall).with_content 'New Step' -%>
   </div>
+<% end -%>
+
+<!-- used for powering autocomplete -->
+<%= form_with url: case_steps_path(test_case), method: :get,
+  data: { case_step_builder_target: 'form', turbo_frame: dom_id(test_case, :step_options) } do |form| -%>
+  <%= form.hidden_field :title, data: { case_step_builder_target: 'titleField' } -%>
 <% end -%>

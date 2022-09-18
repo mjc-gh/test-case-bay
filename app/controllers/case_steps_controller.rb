@@ -2,9 +2,19 @@ class CaseStepsController < ApplicationController
   before_action :authenticate_user!
 
   before_action :set_case
-  before_action :set_step, only: %i[reorder destroy]
+  before_action :set_step, only: %i[append reorder destroy]
+  before_action :set_case_step, only: %i[reorder destroy]
 
   respond_to :html, :turbo_stream
+
+  def index
+    @used_step_ids = @case.steps.order(:row_order).pluck(:id)
+    @steps = @case.suite.project.steps
+      .where('title LIKE ?', "#{search_params[:title]}%")
+      .where.not(id: @used_step_ids)
+
+    respond_with @steps
+  end
 
   def add_new
     @step = @case.suite.project.steps.new(step_params)
@@ -27,6 +37,12 @@ class CaseStepsController < ApplicationController
     end
 
     respond_with @step, render: :create
+  end
+
+  def append
+    @case_step = @case.steps << @step
+
+    respond_with @case_step, render: :append
   end
 
   def reorder
@@ -55,6 +71,10 @@ class CaseStepsController < ApplicationController
     params.permit(:direction)
   end
 
+  def search_params
+    params.permit(:title)
+  end
+
   def step_params
     params.require(:step).permit(:title, :description, :acceptance_criteria)
   end
@@ -69,7 +89,9 @@ class CaseStepsController < ApplicationController
     @step = Step
       .joins(project: :user)
       .find_by!('users.id = ? AND steps.id = ?', current_user.id, params[:id])
+  end
 
+  def set_case_step
     @case_step = @case.case_steps.find_by!(step_id: @step.id)
   end
 end

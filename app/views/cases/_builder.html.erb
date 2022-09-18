@@ -1,4 +1,4 @@
-<div class="space-y-12">
+<div class="space-y-10">
   <div class="space-y-6">
     <h2 class="text-xl">Case Details</h2>
     <dl class="sm:divide-y sm:divide-gray-200 max-w-screen-sm">
@@ -10,12 +10,11 @@
         <dt class="text-sm font-medium text-gray-300">Acceptance Criteria</dt>
         <dd class="mt-1 text-sm text-white sm:col-span-2 sm:mt-0"><%= test_case.acceptance_criteria -%></dd>
       </div>
-    </div>
   </div>
 
   <div class="space-y-6">
     <h2 class="text-xl">Steps</h2>
-    <div class="pl-4">
+    <div class="pl-4" data-controller="case-step-builder">
       <ol id="<%= dom_id test_case, :steps -%>" class="list-outside list-decimal space-y-3 max-w-screen-md">
         <% ordered_steps.each.with_index do |step, index| -%>
           <%= render 'case_steps/builder_item', test_case: test_case, step: step,
@@ -23,7 +22,7 @@
         <% end -%>
 
         <li class="pl-2" id="<%= dom_id test_case, :last_li -%>">
-          <div data-controller="case-step-builder">
+          <div>
             <div class="relative form-invert">
               <%= turbo_frame_tag dom_id(test_case, :builder) do -%>
                 <%= render 'case_steps/form', test_case: test_case -%>
@@ -32,6 +31,13 @@
           </div>
         </li>
       </ol>
+
+      <ul class="transition-opacity opacity-0 my-2 ml-2 mr-4 rounded-md max-w-screen-md"
+          data-case-step-builder-target="list"
+          data-action="mouseleave->case-step-builder#blur">
+        <%= turbo_frame_tag dom_id(test_case, :step_options), class: 'space-y-2 rounded-md block border border-gray-300 empty:border-transparent transition-all' do -%>
+        <% end -%>
+      </ul>
     </div>
   </div>
 </div>

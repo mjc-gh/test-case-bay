@@ -1,27 +1,73 @@
 import { Controller } from '@hotwired/stimulus';
+import { useDebounce } from 'stimulus-use';
 
 export default class extends Controller {
+  static debounces = ['submitForm'];
+
   static targets = [
-    'search', 'newButton', 'newTitle'
+    'search', 'form', 'list', 'option', 'newButton', 'titleField'
   ];
+
+  // TODO mvoe to stimulus values
+  get hoverClasses() {
+    return [
+      'bg-stone-600'
+    ];
+  }
 
   get searchValue() {
     return this.searchTarget.value;
   }
 
   connect() {
-    console.log(this);
+    useDebounce(this);
   }
 
-  update() {
+  change() {
     const value = this.searchValue;
 
-    this.newTitleTarget.value = value;
+    this.titleFieldTargets.forEach(input => input.value = value);
 
     if (value.length > 0) {
+      this.submitForm();
       this.newButtonTarget.classList.remove('opacity-0');
+      this.listTarget.classList.remove('opacity-0');
     } else {
       this.newButtonTarget.classList.add('opacity-0');
+      this.listTarget.classList.add('opacity-0');
+
+      requestAnimationFrame(() => {
+        this.listTarget.children[0].innerHTML = '';
+      });
     }
+  }
+
+  submitForm() {
+    this.formTarget.dispatchEvent(new CustomEvent('submit', { bubbles: true }));
+  }
+
+  blur() {
+    this.toggleOptions();
+  }
+
+  clear() {
+    this.searchTarget.value = '';
+    this.change();
+    this.blur();
+  }
+
+  focus(ev) {
+    this.toggleOptions(ev.target);
+  }
+
+  toggleOptions(focused) {
+    this.optionTargets.forEach(option => {
+      if (option === focused) {
+        option.classList.add(...this.hoverClasses);
+
+      } else {
+        option.classList.remove(...this.hoverClasses);
+      }
+    });
   }
 }
