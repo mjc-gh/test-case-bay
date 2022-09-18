@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   # Public assignment resource using the token as the :id
   resources :assignments, only: :show do
     resources :cases, only: [] do
-      resources :steps, only: %i[index update], controller: 'assignment_case_steps'
+      resources :steps, only: %i[index edit update], controller: 'assignment_case_steps'
     end
   end
 end

@@ -1,7 +1,26 @@
 <%= turbo_frame_tag dom_id(@case, :steps) do -%>
-  <ol class="list-outside list-decimal space-y-2">
+  <ol class="list-outside list-decimal space-y-2 ml-8">
     <% @steps.each.with_index do |step, index| -%>
-      <%= render OrderedStepComponent.new(step: step, test_case: @case) do -%>
+      <%= render OrderedStepComponent.new(step: step, test_case: @case) do |c| -%>
+        <% if asc = @assignment_case_steps[step.id] -%>
+          <% c.status do -%>
+            <%= render BadgeComponent.new(color: assignment_case_status_badge_color(asc.status)) do -%>
+              <%= asc.status.to_s.upcase -%>
+            <% end -%>
+          <% end -%>
+
+        <% else -%>
+          <div class="flex justify-end gap-2">
+            <%= form_with method: :patch, url: assignment_case_step_path(@assignment.token, @case, step) do -%>
+              <%= hidden_field_tag :status, 'passed' -%>
+              <%= render ButtonComponent.new(type: 'submit', size: :xsmall).with_content('Pass') -%>
+            <% end -%>
+
+            <%= link_to edit_assignment_case_step_path(@assignment.token, @case, step) do |form| -%>
+              <%= render ButtonComponent.new(color: :danger, size: :xsmall).with_content('Fail') -%>
+            <% end -%>
+          </div>
+        <% end -%>
       <% end -%>
     <% end -%>
   </ol>

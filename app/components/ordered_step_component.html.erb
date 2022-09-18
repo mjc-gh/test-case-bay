@@ -1,17 +1,21 @@
-<li class="pl-2">
+<li class="pl-2" id="<%= dom_id(@step, :item) -%>">
   <div class="flex flex-col">
     <div class="flex justify-between">
       <h5 class="text-xl"><%= @step.title -%></h5>
 
-      <div class="flex items-center gap-2">
-        <% edit_actions.each do |edit_action| -%>
-          <%= edit_action -%>
-        <% end -%>
-      </div>
+      <%= status -%>
+
+      <% if edit_actions.any? -%>
+        <div class="flex items-center gap-2">
+          <% edit_actions.each do |edit_action| -%>
+            <%= edit_action -%>
+          <% end -%>
+        </div>
+      <% end -%>
     </div>
 
     <p class="text-base text-gray-400"><%= @step.acceptance_criteria -%></p>
 
-    <% content -%>
+    <%= content -%>
   </div>
 </li>

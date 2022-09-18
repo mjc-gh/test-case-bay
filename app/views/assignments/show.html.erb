@@ -8,7 +8,15 @@
   <div class="pl-4">
     <ol class="list-outside list-decimal space-y-10 max-w-screen-md">
       <% @cases.each do |test_case| -%>
-        <%= render OrderedCaseComponent.new(run: @run, test_case: test_case) do -%>
+        <%= render OrderedCaseComponent.new(run: @run, test_case: test_case) do |c| -%>
+          <% c.status do -%>
+            <%= turbo_frame_tag dom_id(test_case, :status) do -%>
+              <% @assignment.case_status(test_case).tap do |case_status| -%>
+                <%= render BadgeComponent.new(color: assignment_case_status_badge_color(case_status)).with_content case_status.to_s.upcase -%>
+              <% end -%>
+            <% end -%>
+          <% end -%>
+
           <%= turbo_frame_tag dom_id(test_case, :steps) do -%>
             <div class="flex justify-end">
               <%= link_to assignment_case_steps_path(@assignment.token, test_case) do -%>

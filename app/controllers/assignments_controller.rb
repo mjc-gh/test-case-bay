@@ -6,7 +6,8 @@ class AssignmentsController < ApplicationController
   # Public URL using token
   # TODO make a separate controller?
   def show
-    @assignment = Assignment.includes(run: :cases)
+    @assignment = Assignment
+      .includes(assignment_case_steps: :case, run: :cases)
       .find_by(token: params[:id])
 
     @run = @assignment.run

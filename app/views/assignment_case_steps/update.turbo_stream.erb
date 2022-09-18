@@ -1,0 +1,15 @@
+<%= turbo_stream.replace dom_id(@step, :item) do -%>
+  <%= render OrderedStepComponent.new(step: @step, test_case: @case) do |c| -%>
+    <% c.status do -%>
+      <%= render BadgeComponent.new(color: assignment_case_status_badge_color(@assignment_case_step.status)) do -%>
+        <%= @assignment_case_step.status.to_s.upcase -%>
+      <% end -%>
+    <% end -%>
+  <% end -%>
+<% end -%>
+
+<%= turbo_stream.update dom_id(@case, :status) do -%>
+  <% @assignment.case_status(@case).tap do |case_status| -%>
+    <%= render BadgeComponent.new(color: assignment_case_status_badge_color(case_status)).with_content case_status.to_s.upcase -%>
+  <% end -%>
+<% end -%>

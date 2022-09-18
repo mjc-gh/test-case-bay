@@ -3,11 +3,15 @@
     <div class="flex justify-between">
       <h5 class="text-xl"><%= @case.title -%></h5>
 
-      <div class="flex items-center gap-2">
-        <% edit_actions.each do |edit_action| -%>
-          <%= edit_action -%>
-        <% end -%>
-      </div>
+      <%= status -%>
+
+      <% if edit_actions.any? -%>
+        <div class="flex items-center gap-2">
+          <% edit_actions.each do |edit_action| -%>
+            <%= edit_action -%>
+          <% end -%>
+        </div>
+      <% end -%>
     </div>
 
     <p class="text-base text-gray-400"><%= @case.acceptance_criteria -%></p>

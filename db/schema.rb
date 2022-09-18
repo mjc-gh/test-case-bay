@@ -14,14 +14,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_18_115150) do
   create_table "assignment_case_steps", force: :cascade do |t|
     t.integer "assignment_id", null: false
     t.integer "case_id", null: false
-    t.datetime "completed_at"
-    t.boolean "completed", default: false, null: false
-    t.boolean "passed", default: false
+    t.integer "step_id", null: false
+    t.boolean "passed"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["assignment_id"], name: "index_assignment_case_steps_on_assignment_id"
     t.index ["case_id"], name: "index_assignment_case_steps_on_case_id"
+    t.index ["step_id"], name: "index_assignment_case_steps_on_step_id"
   end
 
   create_table "assignments", force: :cascade do |t|
@@ -122,6 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_18_115150) do
 
   add_foreign_key "assignment_case_steps", "assignments"
   add_foreign_key "assignment_case_steps", "cases"
+  add_foreign_key "assignment_case_steps", "steps"
   add_foreign_key "assignments", "runs"
   add_foreign_key "case_runs", "cases"
   add_foreign_key "case_runs", "runs"
