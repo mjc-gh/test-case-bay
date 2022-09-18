@@ -10,3 +10,9 @@ achillas_app_qa_onboarding_returning:
   title: Returning Customers
   acceptance_criteria: |
     Returning customer can resume onboarding
+
+achillas_app_create_project_post:
+  suite: achillas_app_qa_onboarding
+  title: Create new Job post
+  acceptance_criteria: |
+    A job post is successfully published and publicly viewable

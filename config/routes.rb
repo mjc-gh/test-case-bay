@@ -11,9 +11,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :runs do
-  end
-
   resources :cases, only: [] do
     resources :steps, only: %i[index create destroy], controller: 'case_steps' do
       collection do
@@ -23,6 +20,15 @@ Rails.application.routes.draw do
         post 'add_new' => :add_new, as: :add_new
       end
 
+      member do
+        post :append
+        patch :reorder
+      end
+    end
+  end
+
+  resources :runs do
+    resources :cases, only: %i[index destroy], controller: 'case_runs' do
       member do
         post :append
         patch :reorder

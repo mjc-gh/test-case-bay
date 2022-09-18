@@ -30,11 +30,18 @@ export default class extends Controller {
 
     if (value.length > 0) {
       this.submitForm();
-      this.newButtonTarget.classList.remove('opacity-0');
       this.listTarget.classList.remove('opacity-0');
+
+      if (this.hasNewButtonTarget) {
+        this.newButtonTarget.classList.remove('opacity-0');
+      }
     } else {
-      this.newButtonTarget.classList.add('opacity-0');
       this.listTarget.classList.add('opacity-0');
+
+      if (this.hasNewButtonTarget) {
+        this.newButtonTarget.classList.add('opacity-0');
+      }
+
 
       requestAnimationFrame(() => {
         this.listTarget.children[0].innerHTML = '';

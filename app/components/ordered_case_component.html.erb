@@ -1,0 +1,15 @@
+<li class="pl-2">
+  <div class="flex flex-col">
+    <div class="flex justify-between">
+      <h5 class="text-xl"><%= @case.title -%></h5>
+
+      <div class="flex items-center gap-2">
+        <% edit_actions.each do |edit_action| -%>
+          <%= edit_action -%>
+        <% end -%>
+      </div>
+    </div>
+
+    <p class="text-base text-gray-400"><%= @case.acceptance_criteria -%></p>
+  </div>
+</li>

@@ -18,12 +18,12 @@
       <ol id="<%= dom_id test_case, :steps -%>" class="list-outside list-decimal space-y-3 max-w-screen-md">
         <% ordered_steps.each.with_index do |step, index| -%>
           <%= render 'case_steps/builder_item', test_case: test_case, step: step,
-            position: (index.zero? ? :first : index == ordered_steps.size - 1 ? :last : :middle) -%>
+            position: position_from_index(index, ordered_steps.size) -%>
         <% end -%>
 
         <li class="pl-2" id="<%= dom_id test_case, :last_li -%>">
           <div>
-            <div class="relative form-invert">
+            <div class="relative form-invert overflow-hidden">
               <%= turbo_frame_tag dom_id(test_case, :builder) do -%>
                 <%= render 'case_steps/form', test_case: test_case -%>
               <% end -%>

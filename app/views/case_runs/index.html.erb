@@ -1,22 +1,22 @@
-<%= turbo_frame_tag dom_id(@case, :step_options) do -%>
-  <% @steps.each do |step| -%>
+<%= turbo_frame_tag dom_id(@run, :case_options) do -%>
+  <% @cases.each do |test_case| -%>
     <li class="relative cursor-default select-none py-2 px-3 rounded-md transition-all overflow-hidden"
         data-case-step-builder-target="option"
         data-action="mouseenter->case-step-builder#focus"
         tabindex="-1"
         role="option">
-      <%= form_with url: append_case_step_path(@case, step), class: 'grid overflow-hidden' do |f| -%>
+      <%= form_with url: append_run_case_path(@run, test_case), class: 'grid overflow-hidden' do |f| -%>
         <button class="flex items-center gap-1 text-white overflow-hidden" type="submit" data-action="case-step-builder#clear">
-          <h5 class="text-lg truncate"><%= step.title -%></h5>
-          <p class="text-base text-gray-300 truncate"><%= step.acceptance_criteria -%></p>
+          <h5 class="text-lg truncate"><%= test_case.title -%></h5>
+          <p class="text-base text-gray-300 truncate"><%= test_case.description -%></p>
         </button>
       <% end -%>
     </li>
   <% end -%>
 
-  <% if @steps.empty? -%>
+  <% if @cases.empty? -%>
     <div class="text-base text-center text-gray-300 py-2 pl-3 pr-9">
-      No existing step found.
+      No remaining cases found.
     </div>
   <% end -%>
 <% end -%>

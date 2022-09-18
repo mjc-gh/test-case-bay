@@ -30,7 +30,9 @@ class RunsControllerTest < ActionDispatch::IntegrationTest
       }
     end
 
-    assert_redirected_to run_path(Run.last)
+    assert_redirected_to run_path(run = Run.last)
+
+    assert_equal run.project, projects(:achillas_app_qa)
   end
 
   test 'show run' do

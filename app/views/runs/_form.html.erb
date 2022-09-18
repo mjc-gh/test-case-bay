@@ -1,8 +1,8 @@
 <%= form_with(model: run) do |form| %>
   <% if run.new_record? -%>
     <div>
-      <%= form.label :project, style: "display: block" %>
-      <%= form.select :project, @projects.map { |p| [ p.title, p.id ] } %>
+      <%= form.label :project_id, style: "display: block" %>
+      <%= form.select :project_id, @projects.map { |p| [ p.title, p.id ] } %>
     </div>
   <% end -%>
 

@@ -15,6 +15,8 @@ class RunsController < ApplicationController
   end
 
   def show
+    @ordered_cases = @run.cases.order(:row_order).load
+
     respond_with @run
   end
 
@@ -29,7 +31,7 @@ class RunsController < ApplicationController
   end
 
   def create
-    @project = current_user.projects.find_by!(run_params[:project_id])
+    @project = current_user.projects.find_by!(id: run_params[:project_id])
     @run = @project.runs.create(run_params.to_h.without(:project_id))
 
     respond_with(@run)
@@ -49,7 +51,9 @@ class RunsController < ApplicationController
   private
 
   def set_run
-    @run = Run.find(params[:id])
+    @run = Run.joins(:project)
+      .where('projects.user_id = ?', current_user.id)
+      .find_by(id: params[:id])
   end
 
   def set_projects

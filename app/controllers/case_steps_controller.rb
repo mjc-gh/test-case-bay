@@ -10,8 +10,9 @@ class CaseStepsController < ApplicationController
   def index
     @used_step_ids = @case.steps.order(:row_order).pluck(:id)
     @steps = @case.suite.project.steps
-      .where('title LIKE ?', "#{search_params[:title]}%")
-      .where.not(id: @used_step_ids)
+      .where('UPPER(title) LIKE ?', "%#{search_params[:title].to_s.upcase}%")
+
+    @steps = @steps.where.not(id: @used_step_ids) if @used_step_ids.any?
 
     respond_with @steps
   end
@@ -42,7 +43,7 @@ class CaseStepsController < ApplicationController
   def append
     @case_step = @case.steps << @step
 
-    respond_with @case_step, render: :append
+    respond_with @step, render: :append
   end
 
   def reorder

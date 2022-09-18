@@ -1,0 +1,4 @@
+<%= turbo_stream.before dom_id(@run, :last_li) do -%>
+  <%= render 'case_runs/builder_item', run: @run, test_case: @case,
+    position: @run.cases.count == 1 ? :single : :last -%>
+<% end -%>

@@ -1,0 +1,54 @@
+<div class="space-y-10">
+  <h2 class="text-xl">Run Details</h2>
+  <dl class="sm:divide-y sm:divide-gray-200 max-w-screen-sm">
+    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+      <dt class="text-sm font-medium text-gray-300">Project</dt>
+      <dd class="mt-1 text-sm text-white sm:col-span-2 sm:mt-0"><%= run.project.title -%></dd>
+    </div>
+    <div>
+    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+      <dt class="text-sm font-medium text-gray-300">Description</dt>
+      <dd class="mt-1 text-sm text-white sm:col-span-2 sm:mt-0">
+        <%= run.description.blank? ? tag.span(class: 'text-rose-200') { 'None Provided' } : run.description -%>
+      </dd>
+    </div>
+    <div>
+  </dl>
+
+  <div class="space-y-6">
+    <h2 class="text-xl">Steps</h2>
+    <div class="pl-4" data-controller="case-step-builder">
+      <ol id="<%= dom_id run, :cases -%>" class="list-outside list-decimal space-y-3 max-w-screen-md">
+        <% ordered_cases.each.with_index do |test_case, index| -%>
+          <%= render 'case_runs/builder_item', run: run, test_case: test_case,
+            position: position_from_index(index, ordered_cases.size) -%>
+        <% end -%>
+
+        <li class="pl-2" id="<%= dom_id run, :last_li -%>">
+          <div class="form-invert">
+            <input type="text"
+                   autocomplete="off"
+                   name="text"
+                   placeholder="Add test cases to run..."
+                   data-case-step-builder-target="search"
+                   data-action="case-step-builder#change"
+                   class="pr-24" />
+          </div>
+
+          <!-- used for powering autocomplete -->
+          <%= form_with url: run_cases_path(run), method: :get,
+            data: { case_step_builder_target: 'form', turbo_frame: dom_id(run, :case_options) } do |form| -%>
+            <%= form.hidden_field :title, data: { case_step_builder_target: 'titleField' } -%>
+          <% end -%>
+        </li>
+      </ol>
+
+      <ul class="transition-opacity opacity-0 my-2 ml-2 mr-4 rounded-md max-w-screen-md"
+          data-case-step-builder-target="list"
+          data-action="mouseleave->case-step-builder#blur">
+        <%= turbo_frame_tag dom_id(run, :case_options), class: 'space-y-2 rounded-md block border border-gray-300 empty:border-transparent transition-all' do -%>
+        <% end -%>
+      </ul>
+    </div>
+  </div>
+</div>
