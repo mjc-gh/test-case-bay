@@ -64,7 +64,9 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Send emails via MAILGUN
-  ActionMailer::Base.smtp_settings = {
+  config.action_mailer.default_url_options = { host: 'test-case-bay.herokuapp.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
     :port           => ENV['MAILGUN_SMTP_PORT'],
     :address        => ENV['MAILGUN_SMTP_SERVER'],
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
@@ -72,8 +74,6 @@ Rails.application.configure do
     :domain         => 'yourapp.heroku.com',
     :authentication => :plain,
   }
-
-  ActionMailer::Base.delivery_method = :smtp
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
