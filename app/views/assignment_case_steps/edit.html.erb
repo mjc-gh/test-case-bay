@@ -1,0 +1,19 @@
+<%= turbo_frame_tag dom_id(@step, :actions) do -%>
+  <div class="relative">
+    <%= form_with method: :patch, id: dom_id(@step, :pass_btn), url: assignment_case_step_path(@assignment.token, @case, @step) do -%>
+      <%= hidden_field_tag :status, 'passed' -%>
+    <% end -%>
+
+    <%= form_with class: '', model: @assignment_case_step,
+      method: :patch, url: assignment_case_step_path(@assignment.token, @case, @step) do |form| -%>
+      <%= hidden_field_tag :status, 'failed' -%>
+      <%= form.text_area :notes, autofocus: 'true', class: 'w-full', rows: 2, placeholder: 'Provide failure notes...' -%>
+
+      <div class="flex justify-between">
+        <%= render ButtonComponent.new(type: 'submit', form: dom_id(@step, :pass_btn), size: :xsmall).with_content 'Pass' -%>
+
+        <%= render ButtonComponent.new(type: 'submit', color: :danger, size: :xsmall).with_content 'Fail' -%>
+      </div>
+    <% end -%>
+  </div>
+<% end -%>

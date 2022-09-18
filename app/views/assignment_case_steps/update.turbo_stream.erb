@@ -5,6 +5,8 @@
         <%= @assignment_case_step.status.to_s.upcase -%>
       <% end -%>
     <% end -%>
+
+    <%= render AssignmentFailureComponent.new(assignment_case_step: @assignment_case_step) -%>
   <% end -%>
 <% end -%>
 

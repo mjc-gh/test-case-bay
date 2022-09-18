@@ -14,11 +14,15 @@ class AssignmentCaseStepsController < ApplicationController
   end
 
   def edit
+    @assignment_case_step = AssignmentCaseStep.new
+
+    respond_with @step
   end
 
   def update
     @assignment_case_step = @assignment.assignment_case_steps.new(case: @case, step: @step)
     @assignment_case_step.passed = assignment_case_step_params[:status] == 'passed'
+    @assignment_case_step.attributes = assignment_case_step_failure_params unless @assignment_case_step.passed?
     @assignment_case_step.save
 
     respond_with @assignment_case_step, render: :update
@@ -28,6 +32,10 @@ class AssignmentCaseStepsController < ApplicationController
 
   def assignment_case_step_params
     params.permit(:status)
+  end
+
+  def assignment_case_step_failure_params
+    params.require(:assignment_case_step).permit(:notes)
   end
 
   def set_assignment
