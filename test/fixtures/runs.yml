@@ -1,0 +1,4 @@
+app_qa_run_1:
+  project: achillas_app_qa
+  title: QA Run 1
+  case_runs_count: 2

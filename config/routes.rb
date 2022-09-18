@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :runs do
+  end
+
   resources :cases, only: [] do
     resources :steps, only: %i[index create destroy], controller: 'case_steps' do
       collection do

@@ -1,0 +1,9 @@
+app_qa_run_1_case_1:
+  case: achillas_app_qa_onboarding_new
+  run: app_qa_run_1
+  row_order: 1
+
+app_qa_run_1_case_2:
+  case: achillas_app_qa_onboarding_returning
+  run: app_qa_run_1
+  row_order: 2

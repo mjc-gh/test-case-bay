@@ -1,0 +1,19 @@
+<%= render PageComponent.new do |c| -%>
+  <% c.header { 'All Test Runs' } -%>
+
+  <% c.action do -%>
+    <%= link_to new_run_path do %>
+      <%= render ButtonComponent.new.with_content 'New Test Run' -%>
+    <% end -%>
+  <% end -%>
+
+  <% render GridComponent.new(id: 'projects') do |gc| -%>
+    <% @runs.each do |run| %>
+      <% gc.item do -%>
+        <%= link_to run do -%>
+          <%= render run %>
+        <% end -%>
+      <% end %>
+    <% end -%>
+  <% end -%>
+<% end -%>

@@ -1,0 +1,32 @@
+<%= render PageComponent.new do |c| -%>
+  <% c.header { @run.title } -%>
+
+  <% c.action do -%>
+    <%= link_to runs_path do %>
+      <%= render ButtonComponent.new(color: :clear).with_content 'Back' -%>
+    <% end -%>
+  <% end -%>
+
+  <% c.action do -%>
+    <%= link_to edit_run_path(@run) do %>
+      <%= render ButtonComponent.new.with_content 'Edit' -%>
+    <% end -%>
+  <% end -%>
+
+  <% c.action do -%>
+    <%= form_with model: @run, url: @run, method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: 'inline' do -%>
+      <%= render ButtonComponent.new(type: 'submit', color: :danger).with_content 'Delete' -%>
+    <% end -%>
+  <% end -%>
+
+  <h2 class="text-xl">Case Details</h2>
+  <dl class="sm:divide-y sm:divide-gray-200 max-w-screen-sm">
+    <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+      <dt class="text-sm font-medium text-gray-300">Description</dt>
+      <dd class="mt-1 text-sm text-white sm:col-span-2 sm:mt-0">
+        <%= @run.description.empty? ? tag.span(class: 'text-rose-200') { 'None Provided' } : @run.description -%>
+      </dd>
+    </div>
+    <div>
+  </dl>
+<% end -%>

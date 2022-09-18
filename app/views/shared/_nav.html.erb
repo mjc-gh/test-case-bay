@@ -4,6 +4,7 @@
 
     <% if user_signed_in? -%>
       <ul class="flex gap-10 justify-center items-center pt-2">
+        <li><%= link_to 'Runs', runs_path, class: 'text-teal-400 text-lg hover:underline' -%></li>
         <li><%= link_to 'Projects', projects_path, class: 'text-teal-400 text-lg hover:underline' -%></li>
         <li><%= link_to 'Account', '#', class: 'text-teal-400 text-lg hover:underline' -%></li>
 

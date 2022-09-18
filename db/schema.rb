@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_17_142431) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_18_005302) do
+  create_table "case_runs", force: :cascade do |t|
+    t.integer "case_id", null: false
+    t.integer "run_id", null: false
+    t.integer "row_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["case_id"], name: "index_case_runs_on_case_id"
+    t.index ["run_id"], name: "index_case_runs_on_run_id"
+  end
+
   create_table "case_steps", force: :cascade do |t|
     t.integer "case_id", null: false
     t.integer "step_id", null: false
@@ -41,6 +51,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_17_142431) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "runs", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.integer "case_runs_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_runs_on_project_id"
   end
 
   create_table "steps", force: :cascade do |t|
@@ -75,10 +95,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_17_142431) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "case_runs", "cases"
+  add_foreign_key "case_runs", "runs"
   add_foreign_key "case_steps", "cases"
   add_foreign_key "case_steps", "steps"
   add_foreign_key "cases", "suites"
   add_foreign_key "projects", "users"
+  add_foreign_key "runs", "projects"
   add_foreign_key "steps", "projects"
   add_foreign_key "suites", "projects"
 end

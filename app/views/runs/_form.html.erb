@@ -1,0 +1,22 @@
+<%= form_with(model: run) do |form| %>
+  <% if run.new_record? -%>
+    <div>
+      <%= form.label :project, style: "display: block" %>
+      <%= form.select :project, @projects.map { |p| [ p.title, p.id ] } %>
+    </div>
+  <% end -%>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
