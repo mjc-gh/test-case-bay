@@ -7,8 +7,56 @@
   @apply rounded-md;
 }
 
-.form-invert [type='text'], [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
+.form-invert [type='text'],
+.form-invert  [type='email'],
+.form-invert  [type='url'],
+.form-invert  [type='password'],
+.form-invert  [type='number'],
+.form-invert  [type='date'],
+.form-invert  [type='datetime-local'],
+.form-invert  [type='month'],
+.form-invert  [type='search'],
+.form-invert  [type='tel'],
+.form-invert  [type='time'],
+.form-invert  [type='week'],
+.form-invert  [multiple],
+.form-invert  textarea,
+.form-invert  select {
   @apply min-w-full;
   @apply bg-transparent;
   @apply !text-white ;
+}
+form {
+  @apply max-w-screen-md;
+}
+
+form [type='text'],
+form [type='email'],
+form [type='url'],
+form [type='password'],
+form [type='number'],
+form [type='date'],
+form [type='datetime-local'],
+form [type='month'],
+form [type='search'],
+form [type='tel'],
+form [type='time'],
+form [type='week'],
+form [multiple],
+form textarea,
+form select {
+  @apply min-w-full;
+}
+
+form .field {
+  @apply my-4;
+}
+
+form .field label {
+  @apply text-gray-300;
+  @apply text-base;
+}
+
+form .actions {
+  @apply my-4;
 }

@@ -2,10 +2,12 @@
   <% c.header { @assignment.run.title } -%>
 
   <% c.sub_header do -%>
-    <p class="text-lg text-gray-300">You have been assigned to perform the following Test cases and steps</p>
+    <p class="text-base text-gray-400">Assigned to: <%= @assignment.email -%></p>
   <% end -%>
 
-  <div class="pl-4">
+  <div class="mt-10 pl-4">
+    <p class="text-lg text-gray-300">Please the assigned test cases and steps and mark each step as either "Pass" or "Fail"</p>
+
     <ol class="list-outside list-decimal space-y-10 max-w-screen-md">
       <% @cases.each do |test_case| -%>
         <%= render OrderedCaseComponent.new(run: @run, test_case: test_case) do |c| -%>

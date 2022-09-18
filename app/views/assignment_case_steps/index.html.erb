@@ -9,9 +9,7 @@
             <% end -%>
           <% end -%>
 
-          <% unless asc.passed? -%>
-            <p class="text-sm text-red-300"><%= asc.notes || tag.span(class: 'italic') { 'No notes provided.' } -%></p>
-          <% end -%>
+          <%= render AssignmentFailureComponent.new(assignment_case_step: asc) -%>
 
         <% else -%>
           <%= turbo_frame_tag dom_id(step, :actions) do -%>

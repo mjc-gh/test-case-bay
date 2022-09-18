@@ -1,2 +1,16 @@
-<div class="h-full w-full">
-</div>
+<%= render PageComponent.new do |c| -%>
+  <% c.header { 'Welcome!' } -%>
+
+  <div class="prose prose-md prose-lg max-w-prose prose-invert">
+    <p>TestCaseBay is the simple yet effective Test Case Management tool. With TestCaseBay, you are able to:</p>
+    <ul class="list-disc list-inside">
+      <li>Create multiple Projects</li>
+      <li>Add collections of Test Suites to each Project</li>
+      <li>Add Test Cases to each Suite</li>
+      <li>Add ordered Test Steps to each Case</li>
+      <li>Steps are shared throughout the Project to reduce redundancy and save you lots of typing!</li>
+    </ul>
+
+    <p>Won't you get started today by <%= link_to 'Signing Up', new_user_session_path -%>!</p>
+  </div>
+<% end -%>
